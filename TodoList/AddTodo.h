@@ -1,10 +1,21 @@
 #pragma once
 
-#include <iostream>
-
-using namespace std;
-
-void AddTodo(Todo* arr, int size)
+Todo* AddTodo(Todo* oldArr, int *size)
 {
-	cout << "\nTodo added\n";
+	setlocale(LC_ALL, "Ru");
+	(*size)++;
+	Todo* newArr = new Todo[*size];
+
+	for (int i = 0; i < *size - 1; ++i)
+		newArr[i] = oldArr[i];
+	delete[]oldArr;
+
+	Todo* newTodo = new Todo;
+	puts("<<< Создание нового дела: >>>");
+	puts("Введите название: ");
+	char s[80];
+	gets_s(s);
+	puts(s);
+
+	return newArr;
 }

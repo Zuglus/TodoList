@@ -1,4 +1,3 @@
-#include <iostream>
 #include "TodoStruct.h"
 #include "ShowTodos.h"
 #include "ShowMenu.h"
@@ -11,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	setlocale(NULL, "Ru");
+	setlocale(LC_ALL, "Ru");
 
 	// Массив списка дел
 	int sizeOfTodoList = 0;
@@ -19,7 +18,6 @@ int main()
 
 	// Меню выбора
 	const int sizeMenu = 6;
-	void(*menu[sizeMenu - 1])(Todo*, int) = { AddTodo, DelTodo, UpdateTodo, FindTodo, ShowTodos };
 	const char* menuNames[sizeMenu] = {
 		 "1 - Добавить дело",
 		 "2 - Удалить дело",
@@ -30,5 +28,29 @@ int main()
 	};
 
 	ShowTodos(todoList, sizeOfTodoList);
-	ShowMenu(menu, menuNames, sizeMenu, todoList, sizeOfTodoList);
+	while (1)
+	{
+		int selected = ShowMenu(menuNames, sizeMenu);
+
+		switch (selected)
+		{
+		case 1:
+			todoList = AddTodo(todoList, &sizeOfTodoList);
+			break;
+		case 2:
+			DelTodo(todoList, &sizeOfTodoList);
+			break;
+		case 3:
+			UpdateTodo(todoList, sizeOfTodoList);
+			break;
+		case 4:
+			FindTodo(todoList, sizeOfTodoList);
+			break;
+		case 5:
+			ShowTodos(todoList, sizeOfTodoList);
+			break;
+		default:
+			break;
+		}
+	}
 }
