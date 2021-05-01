@@ -143,9 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddTodo.h" />
+    <ClInclude Include="DelTodo.h" />
+    <ClInclude Include="FindTodo.h" />
     <ClInclude Include="ShowMenu.h" />
     <ClInclude Include="ShowTodos.h" />
     <ClInclude Include="TodoStruct.h" />
+    <ClInclude Include="UpdateTodo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

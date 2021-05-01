@@ -4,12 +4,11 @@
 
 using namespace std;
 
-void ShowMenu(void(*menu), const char* names[], const int size)
+void ShowMenu(void (*menu[])(Todo* x, int y), const char* names[], const int size, Todo* arr, int arrSize)
 {
-	cout << "\nМеню:\n";
-
 	while (1)
 	{
+		cout << "\nМеню:\n";
 		for (int i = 0; i < size; ++i)
 			cout << names[i] << endl;
 
@@ -18,14 +17,20 @@ void ShowMenu(void(*menu), const char* names[], const int size)
 		{
 			cout << ">>> Выберите пункт меню:\n";
 			cin >> selected;
-
-			if (selected >= 1 &&
-				selected <= 6)
+			--selected;
+			if (selected >= 0 &&
+				selected <= size)
 				break;
 
 			cout << "Ошибочный выбор!\n";
 		}
 
-
+		if (selected == size - 1)
+		{
+			cout << "\nВыход из программы...\n";
+			break;
+		}
+		else
+			(*menu[selected])(arr, arrSize);
 	}
 }
