@@ -1,3 +1,4 @@
+#include <windows.h>
 #include "TodoStruct.h"
 #include "ShowTodos.h"
 #include "ShowMenu.h"
@@ -10,7 +11,9 @@ using namespace std;
 
 int main()
 {
-	setlocale(LC_ALL, "Ru");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	setlocale(LC_ALL, "Russian");
 
 	// Массив списка дел
 	int sizeOfTodoList = 0;
@@ -49,7 +52,11 @@ int main()
 		case 5:
 			ShowTodos(todoList, sizeOfTodoList);
 			break;
-		default:
+		}
+
+		if (selected == sizeMenu)
+		{
+			puts("Выход из программы...");
 			break;
 		}
 	}

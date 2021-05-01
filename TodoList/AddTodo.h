@@ -2,7 +2,6 @@
 
 Todo* AddTodo(Todo* oldArr, int *size)
 {
-	setlocale(LC_ALL, "Ru");
 	(*size)++;
 	Todo* newArr = new Todo[*size];
 
@@ -13,9 +12,9 @@ Todo* AddTodo(Todo* oldArr, int *size)
 	Todo* newTodo = new Todo;
 	puts("<<< Создание нового дела: >>>");
 	puts("Введите название: ");
-	char s[80];
-	gets_s(s);
-	puts(s);
+	getchar();
+	cin.getline(newTodo->name, 50);
+	puts(newTodo->name);
 
 	return newArr;
 }

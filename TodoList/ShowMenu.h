@@ -17,14 +17,11 @@ int ShowMenu( const char* names[], const int size)
 			cin >> selected;
 			selected;
 			if (selected - 1 >= 0 &&
-				selected < size)
+				selected <= size)
 				break;
 
 			cout << "Ошибочный выбор!\n";
 		}
 
-		if (selected - 1 == size)
-			cout << "\nВыход из программы...\n";
-		else
 			return selected;
 }
