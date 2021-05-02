@@ -39,7 +39,7 @@ Todo* AddTodo(Todo* oldArr, int *size)
 		newTodo->priority = middle;
 		break;
 	case 3:
-		newTodo->priority = middle;
+		newTodo->priority = high;
 		break;
 	}
 

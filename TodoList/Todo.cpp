@@ -42,7 +42,7 @@ int main()
 			todoList = AddTodo(todoList, &sizeOfTodoList);
 			break;
 		case 2:
-			DelTodo(todoList, &sizeOfTodoList);
+			todoList = DelTodo(todoList, &sizeOfTodoList);
 			break;
 		case 3:
 			UpdateTodo(todoList, sizeOfTodoList);
