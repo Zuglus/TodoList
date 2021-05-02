@@ -1,18 +1,16 @@
 #pragma once
 
-using namespace std;
-
 Todo* DelTodo(Todo* oldArr, int* size)
 {
 	(*size)--;
 	Todo* newArr = new Todo[*size];
 
 	puts("> >> Удаление одного из дел << <");
-	cout << "Введите ID: ";
+	std::cout << "Введите ID: ";
 	int id;
 	while (1)
 	{
-		cin >> id;
+		std::cin >> id;
 		if (id >= 0 &&
 			id <= *size)
 			break;
@@ -28,7 +26,7 @@ Todo* DelTodo(Todo* oldArr, int* size)
 				newArr[i] = oldArr[i + 1];
 		}
 
-	cout << "\nДело с ID: " << id << " удалено.\n";
+	std::cout << "\nДело с ID: " << id << " удалено.\n";
 
 	return newArr;
 }

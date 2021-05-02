@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -145,8 +145,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddTodo.h" />
+    <ClInclude Include="Date.h" />
     <ClInclude Include="DelTodo.h" />
     <ClInclude Include="FindTodo.h" />
+    <ClInclude Include="Priority.h" />
     <ClInclude Include="ShowMenu.h" />
     <ClInclude Include="ShowTodos.h" />
     <ClInclude Include="TodoStruct.h" />

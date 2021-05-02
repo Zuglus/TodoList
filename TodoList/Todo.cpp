@@ -1,5 +1,7 @@
 #include <windows.h>
 #include <iostream>
+#include "Priority.h"
+#include "Date.h"
 #include "TodoStruct.h"
 #include "ShowTodos.h"
 #include "ShowMenu.h"
@@ -7,8 +9,6 @@
 #include "DelTodo.h"
 #include "UpdateTodo.h"
 #include "FindTodo.h"
-
-using namespace std;
 
 int main()
 {
@@ -23,18 +23,18 @@ int main()
 	// Меню выбора
 	const int sizeMenu = 6;
 	const char* menuNames[sizeMenu] = {
-		 "1 - Добавить дело",
-		 "2 - Удалить дело",
-		 "3 - Редактировать дело",
-		 "4 - Поиск дела",
-		 "5 - Отображение списка дел",
-		 "6 - Выход"
+		 " - Добавить дело",
+		 " - Удалить дело",
+		 " - Редактировать дело",
+		 " - Поиск дела",
+		 " - Отображение списка дел",
+		 " - Выход"
 	};
 
 	ShowTodos(todoList, sizeOfTodoList);
 	while (1)
 	{
-		int selected = ShowMenu(menuNames, sizeMenu);
+		int selected = ShowMenu(menuNames, sizeMenu, sizeOfTodoList);
 
 		switch (selected)
 		{
