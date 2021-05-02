@@ -59,5 +59,7 @@ Todo* AddTodo(Todo* oldArr, int *size)
 	puts("Минуты (MM): ");
 	cin >> newTodo->data.minuts;
 
+	newArr[(*size) - 1] = *newTodo;
+
 	return newArr;
 }
