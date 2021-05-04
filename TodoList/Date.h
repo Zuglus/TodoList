@@ -27,11 +27,14 @@ struct Date
 
 void SetDate(Date* date)
 {
-	std::cout << "День (1):";
+	std::cout << "День (1): ";
 	int* tmpDay = new int(1);
 	while (1)
 	{
-		std::cin >> *tmpDay;
+		char s[3];
+		gets_s(s);
+		if (s[0])
+			*tmpDay = atoi(s);
 		if (*tmpDay > 0 &&
 			*tmpDay <= 31)
 			break;
@@ -57,7 +60,10 @@ void SetDate(Date* date)
 	int* tmpMonth = new int(5);
 	while (1)
 	{
-		std::cin >> *tmpMonth;
+		char s[3];
+		gets_s(s);
+		if (s[0])
+			*tmpMonth = atoi(s);
 		if (*tmpMonth > 0 &&
 			*tmpMonth <= 12)
 			break;
@@ -108,7 +114,10 @@ void SetDate(Date* date)
 	int* tmpYear = new int(2021);
 	while (1)
 	{
-		std::cin >> *tmpYear;
+		char s[5];
+		gets_s(s);
+		if (s[0])
+			*tmpYear = atoi(s);
 		if (*tmpYear >= 2021)
 			break;
 		puts("Странный год. Повторите...");
@@ -120,7 +129,10 @@ void SetDate(Date* date)
 	int* tmpHour = new int(12);
 	while (1)
 	{
-		std::cin >> *tmpHour;
+		char s[3];
+		gets_s(s);
+		if (s[0])
+			*tmpHour = atoi(s);
 		if (*tmpHour >= 0 &&
 			*tmpHour < 24)
 			break;
@@ -129,11 +141,14 @@ void SetDate(Date* date)
 	date->hour = *tmpHour;
 	delete tmpHour;
 
-	std::cout << "Минуты (0): ";
+	std::cout << "Минуты (00): ";
 	int* tmpMinuts = new int(0);
 	while (1)
 	{
-		std::cin >> *tmpMinuts;
+		char s[3];
+		gets_s(s);
+		if (s[0])
+			*tmpMinuts = atoi(s);
 		if (*tmpMinuts >= 0 &&
 			*tmpMinuts < 60)
 			break;

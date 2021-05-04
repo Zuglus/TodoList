@@ -3,6 +3,7 @@
 #include "Priority.h"
 #include "Date.h"
 #include "TodoStruct.h"
+#include "ShowTodo.h"
 #include "ShowTodos.h"
 #include "ShowMenu.h"
 #include "AddTodo.h"

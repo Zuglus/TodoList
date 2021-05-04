@@ -150,6 +150,7 @@
     <ClInclude Include="FindTodo.h" />
     <ClInclude Include="Priority.h" />
     <ClInclude Include="ShowMenu.h" />
+    <ClInclude Include="ShowTodo.h" />
     <ClInclude Include="ShowTodos.h" />
     <ClInclude Include="TodoStruct.h" />
     <ClInclude Include="UpdateTodo.h" />
