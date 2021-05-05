@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 enum Priority
 {
@@ -9,9 +9,9 @@ enum Priority
 
 Priority SetPriority()
 {
-	puts("1 - низкий");
-	puts("2 - средний");
-	puts("3 - высокий");
+	puts("1 - РЅРёР·РєРёР№");
+	puts("2 - СЃСЂРµРґРЅРёР№");
+	puts("3 - РІС‹СЃРѕРєРёР№");
 	int selectedPriority;
 	while (true)
 	{
@@ -20,7 +20,7 @@ Priority SetPriority()
 			selectedPriority <= 3)
 			break;
 
-		puts("\nОшибочный выбор!!! Повторите: ");
+		puts("\nРћС€РёР±РѕС‡РЅС‹Р№ РІС‹Р±РѕСЂ!!! РџРѕРІС‚РѕСЂРёС‚Рµ: ");
 	}
 
 	switch (selectedPriority)
@@ -39,13 +39,13 @@ void GetPriority(Priority priority)
 	switch (priority)
 	{
 	case low:
-		std::cout << "низкий";
+		std::cout << "РЅРёР·РєРёР№";
 		break;
 	case middle:
-		std::cout << "средний";
+		std::cout << "СЃСЂРµРґРЅРёР№";
 		break;
 	case high:
-		std::cout << "высокий";
+		std::cout << "РІС‹СЃРѕРєРёР№";
 		break;
 	}
 }

@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 enum Month
 {
@@ -27,7 +27,7 @@ struct Date
 
 void SetDate(Date* date)
 {
-	std::cout << "День (1): ";
+	std::cout << "Р”РµРЅСЊ (1): ";
 	int* tmpDay = new int(1);
 	while (1)
 	{
@@ -38,24 +38,24 @@ void SetDate(Date* date)
 		if (*tmpDay > 0 &&
 			*tmpDay <= 31)
 			break;
-		puts("Ошибочная дата. Повторите...");
+		puts("РћС€РёР±РѕС‡РЅР°СЏ РґР°С‚Р°. РџРѕРІС‚РѕСЂРёС‚Рµ...");
 	}
 	date->day = *tmpDay;
 	delete tmpDay;
 
-	puts("Месяц (май):");
-	puts("1 - январь");
-	puts("2 - февраль");
-	puts("3 - март");
-	puts("4 - апрель");
-	puts("5 - май");
-	puts("6 - июнь");
-	puts("7 - июль");
-	puts("8 - август");
-	puts("9 - сентябрь");
-	puts("10 - октябрь");
-	puts("11 - ноябрь");
-	puts("12 - декабрь");
+	puts("РњРµСЃСЏС† (РјР°Р№):");
+	puts("1 - СЏРЅРІР°СЂСЊ");
+	puts("2 - С„РµРІСЂР°Р»СЊ");
+	puts("3 - РјР°СЂС‚");
+	puts("4 - Р°РїСЂРµР»СЊ");
+	puts("5 - РјР°Р№");
+	puts("6 - РёСЋРЅСЊ");
+	puts("7 - РёСЋР»СЊ");
+	puts("8 - Р°РІРіСѓСЃС‚");
+	puts("9 - СЃРµРЅС‚СЏР±СЂСЊ");
+	puts("10 - РѕРєС‚СЏР±СЂСЊ");
+	puts("11 - РЅРѕСЏР±СЂСЊ");
+	puts("12 - РґРµРєР°Р±СЂСЊ");
 	std::cout << "--> ";
 	int* tmpMonth = new int(5);
 	while (1)
@@ -67,7 +67,7 @@ void SetDate(Date* date)
 		if (*tmpMonth > 0 &&
 			*tmpMonth <= 12)
 			break;
-		puts("Ошибочный ввод. Повторите...");
+		puts("РћС€РёР±РѕС‡РЅС‹Р№ РІРІРѕРґ. РџРѕРІС‚РѕСЂРёС‚Рµ...");
 	}
 	switch (*tmpMonth)
 	{
@@ -110,7 +110,7 @@ void SetDate(Date* date)
 	}
 	delete tmpMonth;
 
-	std::cout << "Год (2021): ";
+	std::cout << "Р“РѕРґ (2021): ";
 	int* tmpYear = new int(2021);
 	while (1)
 	{
@@ -120,12 +120,12 @@ void SetDate(Date* date)
 			*tmpYear = atoi(s);
 		if (*tmpYear >= 2021)
 			break;
-		puts("Странный год. Повторите...");
+		puts("РЎС‚СЂР°РЅРЅС‹Р№ РіРѕРґ. РџРѕРІС‚РѕСЂРёС‚Рµ...");
 	}
 	date->year = *tmpYear;
 	delete tmpYear;
 
-	std::cout << "Час (12): ";
+	std::cout << "Р§Р°СЃ (12): ";
 	int* tmpHour = new int(12);
 	while (1)
 	{
@@ -136,12 +136,12 @@ void SetDate(Date* date)
 		if (*tmpHour >= 0 &&
 			*tmpHour < 24)
 			break;
-		puts("Нужен час от 0 до 23...");
+		puts("РќСѓР¶РµРЅ С‡Р°СЃ РѕС‚ 0 РґРѕ 23...");
 	}
 	date->hour = *tmpHour;
 	delete tmpHour;
 
-	std::cout << "Минуты (00): ";
+	std::cout << "РњРёРЅСѓС‚С‹ (00): ";
 	int* tmpMinuts = new int(0);
 	while (1)
 	{
@@ -152,7 +152,7 @@ void SetDate(Date* date)
 		if (*tmpMinuts >= 0 &&
 			*tmpMinuts < 60)
 			break;
-		puts("Введите минуты от 0 до 59...");
+		puts("Р’РІРµРґРёС‚Рµ РјРёРЅСѓС‚С‹ РѕС‚ 0 РґРѕ 59...");
 	}
 	date->minuts = *tmpMinuts;
 	delete tmpMinuts;

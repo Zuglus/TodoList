@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 struct MenuElement
 {
@@ -30,12 +30,12 @@ bool IsElemIn(char* toFind, char* src, bool isIn)
 
 void ByName(Todo* list, int size)
 {
-	puts("По какому имени искать?");
+	puts("РџРѕ РєР°РєРѕРјСѓ РёРјРµРЅРё РёСЃРєР°С‚СЊ?");
 	char name[50];
 	getchar();
 	gets_s(name);
 
-	puts("Ищем...");
+	puts("РС‰РµРј...");
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
@@ -44,15 +44,15 @@ void ByName(Todo* list, int size)
 	}
 
 	if (!isIn)
-		puts("По этому имени нет данных");
+		puts("РџРѕ СЌС‚РѕРјСѓ РёРјРµРЅРё РЅРµС‚ РґР°РЅРЅС‹С…");
 }
 
 void ByPriority(Todo* list, int size)
 {
-	puts("По какому приоритету ищем?");
+	puts("РџРѕ РєР°РєРѕРјСѓ РїСЂРёРѕСЂРёС‚РµС‚Сѓ РёС‰РµРј?");
 	Priority toFind = SetPriority();
 
-	puts("Ищем...");
+	puts("РС‰РµРј...");
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 		if (list[i].priority == toFind)
@@ -62,17 +62,17 @@ void ByPriority(Todo* list, int size)
 		}
 
 	if (!isIn)
-		puts("По такому приоритету нет данных");
+		puts("РџРѕ С‚Р°РєРѕРјСѓ РїСЂРёРѕСЂРёС‚РµС‚Сѓ РЅРµС‚ РґР°РЅРЅС‹С…");
 }
 
 void ByDescription(Todo* list, int size)
 {
-	puts("Что ищем?");
+	puts("Р§С‚Рѕ РёС‰РµРј?");
 	char toFind[100];
 	getchar();
 	gets_s(toFind);
 
-	puts("Ищем...");
+	puts("РС‰РµРј...");
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
@@ -81,7 +81,7 @@ void ByDescription(Todo* list, int size)
 	}
 
 	if (!isIn)
-		puts("С таким описанием нет данных");
+		puts("РЎ С‚Р°РєРёРј РѕРїРёСЃР°РЅРёРµРј РЅРµС‚ РґР°РЅРЅС‹С…");
 }
 
 void ByTime(Todo* list, int size)
@@ -93,13 +93,13 @@ void FindTodo(Todo* arr, int size)
 {
 	const int menuSize = 4;
 	MenuElement menu[menuSize] = {
-		{" - названию", ByName},
-		{" - приоритету", ByPriority},
-		{" - описанию", ByDescription},
-		{" - времени", ByTime}
+		{" - РЅР°Р·РІР°РЅРёСЋ", ByName},
+		{" - РїСЂРёРѕСЂРёС‚РµС‚Сѓ", ByPriority},
+		{" - РѕРїРёСЃР°РЅРёСЋ", ByDescription},
+		{" - РІСЂРµРјРµРЅРё", ByTime}
 	};
 
-	puts(">>> Поиск дел по: <<<");
+	puts(">>> РџРѕРёСЃРє РґРµР» РїРѕ: <<<");
 	for (int i = 0; i < menuSize; ++i)
 		std::cout << i + 1 << menu[i].name << std::endl;
 
@@ -111,7 +111,7 @@ void FindTodo(Todo* arr, int size)
 		if (select > 0 &&
 			select <= 4)
 			break;
-		puts("Ошибочный выбор. Повторите...");
+		puts("РћС€РёР±РѕС‡РЅС‹Р№ РІС‹Р±РѕСЂ. РџРѕРІС‚РѕСЂРёС‚Рµ...");
 	}
 
 	menu[select - 1].menuFunc(arr, size);

@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 void ShowTodos(Todo* arr, int size)
 {
-	std::cout << "Ñïèñîê äåë:\n";
+	std::cout << "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð´ÐµÐ»:\n";
 
 	if (size)
 		for (int i = 0; i < size; ++i)
@@ -10,5 +10,5 @@ void ShowTodos(Todo* arr, int size)
 			ShowTodo(arr[i], i);
 		}
 	else
-		std::cout << "\nÄåë íå çàïëàíèðîâàíî!!!\n";
+		std::cout << "\nÐ”ÐµÐ» Ð½Ðµ Ð·Ð°Ð¿Ð»Ð°Ð½Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¾!!!\n";
 }

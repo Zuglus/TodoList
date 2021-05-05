@@ -1,15 +1,15 @@
-#pragma once
+ï»¿#pragma once
 
 void ShowTodo(Todo todo, int id)
 {
 	std::cout << "\nID: " << id << std::endl;
-	std::cout << "Íàèìåíîâàíèå: " << todo.name << std::endl;
-	std::cout << "Ïðèîðèòåò: ";
+	std::cout << "ÐÐ°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ: " << todo.name << std::endl;
+	std::cout << "ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚: ";
 	GetPriority(todo.priority);
-	std::cout << "\nÏîäðîáíîñòè: " << todo.description;
-	std::cout << "\nÑðîê èñïîëíåíèÿ: ";
+	std::cout << "\nÐŸÐ¾Ð´Ñ€Ð¾Ð±Ð½Ð¾ÑÑ‚Ð¸: " << todo.description;
+	std::cout << "\nÐ¡Ñ€Ð¾Ðº Ð¸ÑÐ¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ: ";
 	GetDate(todo.date);
-	std::cout << " ê ";
+	std::cout << " Ðº ";
 	GetTime(todo.date);
 	std::cout << std::endl;
 }

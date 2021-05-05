@@ -1,12 +1,12 @@
-#pragma once
+п»ї#pragma once
 
 Todo* DelTodo(Todo* oldArr, int* size)
 {
 	(*size)--;
 	Todo* newArr = new Todo[*size];
 
-	puts("> >> Удаление одного из дел << <");
-	std::cout << "Введите ID: ";
+	puts("> >> РЈРґР°Р»РµРЅРёРµ РѕРґРЅРѕРіРѕ РёР· РґРµР» << <");
+	std::cout << "Р’РІРµРґРёС‚Рµ ID: ";
 	int id;
 	while (1)
 	{
@@ -14,7 +14,7 @@ Todo* DelTodo(Todo* oldArr, int* size)
 		if (id >= 0 &&
 			id <= *size)
 			break;
-		puts("Ошибочный ввод. Повторите...");
+		puts("РћС€РёР±РѕС‡РЅС‹Р№ РІРІРѕРґ. РџРѕРІС‚РѕСЂРёС‚Рµ...");
 	}
 
 	if (*size > 0)
@@ -26,7 +26,7 @@ Todo* DelTodo(Todo* oldArr, int* size)
 				newArr[i] = oldArr[i + 1];
 		}
 
-	std::cout << "\nДело с ID: " << id << " удалено.\n";
+	std::cout << "\nР”РµР»Рѕ СЃ ID: " << id << " СѓРґР°Р»РµРЅРѕ.\n";
 
 	return newArr;
 }

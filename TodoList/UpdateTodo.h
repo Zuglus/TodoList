@@ -1,9 +1,9 @@
-#pragma once
+п»ї#pragma once
 
 void UpdateTodo(Todo* arr, int size)
 {
-	puts("\n> >> Редактирование дела: << <");
-	puts("ID дела, которое редактируем:");
+	puts("\n> >> Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РґРµР»Р°: << <");
+	puts("ID РґРµР»Р°, РєРѕС‚РѕСЂРѕРµ СЂРµРґР°РєС‚РёСЂСѓРµРј:");
 	int* id = new int;
 	while (1)
 	{
@@ -11,14 +11,14 @@ void UpdateTodo(Todo* arr, int size)
 		if (*id >= 0 &&
 			*id < size)
 			break;
-		puts("Ошибочный ID. Повторите...");
+		puts("РћС€РёР±РѕС‡РЅС‹Р№ ID. РџРѕРІС‚РѕСЂРёС‚Рµ...");
 	}
-	puts("Варианты редактирования:");
-	puts("1 - полностью");
-	puts("2 - наименование");
-	puts("3 - приоритет");
-	puts("4 - описание");
-	puts("5 - дата");
+	puts("Р’Р°СЂРёР°РЅС‚С‹ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ:");
+	puts("1 - РїРѕР»РЅРѕСЃС‚СЊСЋ");
+	puts("2 - РЅР°РёРјРµРЅРѕРІР°РЅРёРµ");
+	puts("3 - РїСЂРёРѕСЂРёС‚РµС‚");
+	puts("4 - РѕРїРёСЃР°РЅРёРµ");
+	puts("5 - РґР°С‚Р°");
 	int* answer = new int;
 	while (1)
 	{
@@ -27,7 +27,7 @@ void UpdateTodo(Todo* arr, int size)
 			*answer <= 5)
 			break;
 
-		puts("Ошибочный ввод. Повторите...");
+		puts("РћС€РёР±РѕС‡РЅС‹Р№ РІРІРѕРґ. РџРѕРІС‚РѕСЂРёС‚Рµ...");
 	}
 
 	Todo todo = arr[*id];
@@ -35,33 +35,33 @@ void UpdateTodo(Todo* arr, int size)
 	switch (*answer)
 	{
 	case 1:
-		puts("Новое наименование:");
+		puts("РќРѕРІРѕРµ РЅР°РёРјРµРЅРѕРІР°РЅРёРµ:");
 		getchar();
 		gets_s(todo.name);
-		puts("Новый приоритет:");
+		puts("РќРѕРІС‹Р№ РїСЂРёРѕСЂРёС‚РµС‚:");
 		todo.priority = SetPriority();
-		puts("Новое описание:");
+		puts("РќРѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ:");
 		getchar();
 		gets_s(todo.description);
-		puts("Новая дата:");
+		puts("РќРѕРІР°СЏ РґР°С‚Р°:");
 		SetDate(&todo.date);
 		break;
 	case 2:
-		puts("Новое наименование:");
+		puts("РќРѕРІРѕРµ РЅР°РёРјРµРЅРѕРІР°РЅРёРµ:");
 		getchar();
 		gets_s(todo.name);
 		break;
 	case 3:
-		puts("Новый приоритет:");
+		puts("РќРѕРІС‹Р№ РїСЂРёРѕСЂРёС‚РµС‚:");
 		todo.priority = SetPriority();
 		break;
 	case 4:
-		puts("Новое описание:");
+		puts("РќРѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ:");
 		getchar();
 		gets_s(todo.description);
 		break;
 	case 5:
-		puts("Новая дата:");
+		puts("РќРѕРІР°СЏ РґР°С‚Р°:");
 		SetDate(&todo.date);
 		break;
 	}

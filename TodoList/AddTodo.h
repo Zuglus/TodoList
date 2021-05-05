@@ -1,6 +1,6 @@
-#pragma once
+п»ї#pragma once
 
-Todo* AddTodo(Todo* oldArr, int *size)
+Todo* AddTodo(Todo* oldArr, int* size)
 {
 	(*size)++;
 	Todo* newArr = new Todo[*size];
@@ -10,19 +10,19 @@ Todo* AddTodo(Todo* oldArr, int *size)
 	delete[]oldArr;
 
 	Todo* newTodo = new Todo;
-	puts("\n<<< Создание нового дела: >>>");
-	puts("Как назовём?");
+	puts("\n<<< РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РґРµР»Р°: >>>");
+	puts("РљР°Рє РЅР°Р·РѕРІС‘Рј?");
 	getchar();
 	gets_s(newTodo->name);
 
-	puts("\nВыберите приоритет:");
+	puts("\nР’С‹Р±РµСЂРёС‚Рµ РїСЂРёРѕСЂРёС‚РµС‚:");
 	newTodo->priority = SetPriority();
 
-	puts("\nОпишите: ");
+	puts("\nРћРїРёС€РёС‚Рµ: ");
 	getchar();
 	gets_s(newTodo->description);
 
-	puts("\nВведите дату и время исполнения:");
+	puts("\nР’РІРµРґРёС‚Рµ РґР°С‚Сѓ Рё РІСЂРµРјСЏ РёСЃРїРѕР»РЅРµРЅРёСЏ:");
 	SetDate(&(newTodo->date));
 
 	newArr[(*size) - 1] = *newTodo;
