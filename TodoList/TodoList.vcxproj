@@ -147,7 +147,6 @@
   <ItemGroup>
     <ClInclude Include="AddTodo.h" />
     <ClInclude Include="ConsoleEnter.h" />
-    <ClInclude Include="Date.h" />
     <ClInclude Include="DelTodo.h" />
     <ClInclude Include="FindTodo.h" />
     <ClInclude Include="Priority.h" />

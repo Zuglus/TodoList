@@ -47,9 +47,6 @@
     <ClInclude Include="Priority.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Date.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="ShowTodo.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

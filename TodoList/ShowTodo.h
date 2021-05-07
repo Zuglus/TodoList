@@ -8,8 +8,10 @@ void ShowTodo(Todo todo, int id)
 	GetPriority(todo.priority);
 	std::cout << "\nПодробности: " << todo.description;
 	std::cout << "\nСрок исполнения: ";
-	GetDate(todo.date);
-	std::cout << " к ";
-	GetTime(todo.date);
+	std::cout << todo.date.tm_mday << '.';
+	std::cout << todo.date.tm_mon + 1 << '.';
+	std::cout << todo.date.tm_year + 1900;
+	std::cout << " к " << todo.date.tm_hour;
+	std::cout << ':' << todo.date.tm_min;
 	std::cout << std::endl;
 }

@@ -5,5 +5,5 @@ struct Todo
 	std::string name;
 	Priority priority;
 	std::string description;
-	Date date;
+	tm date;
 };
