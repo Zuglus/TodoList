@@ -6,53 +6,33 @@ struct MenuElement
 	void (*menuFunc)(Todo* x, int);
 };
 
-bool IsElemIn(char* toFind, char* src, bool isIn)
-{
-	for (int i = 0; i < strlen(src); ++i)
-	{
-		if (src[i] == toFind[0])
-		{
-			bool exact = true;
-			for (int j = 0; j < strlen(toFind); ++j)
-				if (src[i + j] != toFind[j])
-				{
-					exact = false;
-					break;
-				}
-			if (!exact)
-				break;
-			isIn = true;
-			return true;
-		}
-	}
-	return false;
-}
-
 void ByName(Todo* list, int size)
 {
-	puts("По какому имени искать?");
-	char name[50];
-	getchar();
-	gets_s(name);
+	std::cout << "По какому имени искать?\n";
+	std::string toFind = ConsoleEnter(50);
 
-	puts("Ищем...");
+	std::cout << "Ищем...";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		//if (IsElemIn(name, list[i].name, isIn))
+		int finded = list[i].name.find(toFind);
+		if (finded >= 0)
+		{
 			ShowTodo(list[i], i);
+			isIn = true;
+		}
 	}
 
 	if (!isIn)
-		puts("По этому имени нет данных");
+		std::cout << "\nПо этому имени нет данных\n";
 }
 
 void ByPriority(Todo* list, int size)
 {
-	puts("По какому приоритету ищем?");
+	std::cout << "\nПо какому приоритету ищем? ";
 	Priority toFind = SetPriority();
 
-	puts("Ищем...");
+	std::cout << "\nИщем...\n";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 		if (list[i].priority == toFind)
@@ -67,21 +47,23 @@ void ByPriority(Todo* list, int size)
 
 void ByDescription(Todo* list, int size)
 {
-	puts("Что ищем?");
-	char toFind[100];
-	getchar();
-	gets_s(toFind);
+	std::cout << "Что ищем?";
+	std::string toFind = ConsoleEnter(50);
 
-	puts("Ищем...");
+	std::cout << "Ищем...";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		//if (IsElemIn(toFind, list[i].description, isIn))
+		int finded = list[i].description.find(toFind);
+		if (finded >= 0)
+		{
 			ShowTodo(list[i], i);
+			isIn = true;
+		}
 	}
 
 	if (!isIn)
-		puts("С таким описанием нет данных");
+		std::cout << "\nПо этому описанию нет данных\n";
 }
 
 void ByTime(Todo* list, int size)

@@ -23,26 +23,70 @@ Todo* AddTodo(Todo* oldArr, int* size)
 
 	std::cout << "\nВведите дату и время исполнения:";
 	time_t now = time(NULL);
-	tm* tmpDate = localtime(&now);
-	
+	tm* tmpDate = new tm;
+	localtime_s(tmpDate, &now);
+
 	while (1)
 	{
-		int tmp;
-		std::cout << "Дата: ";
-		std::cin >> tmp;
-		tmpDate->tm_mday = tmp;
-		std::cout << "Месяц: ";
-		std::cin >> tmp;
-		tmpDate->tm_mon = tmp - 1;
-		std::cout << "Год: ";
-		std::cin >> tmp;
-		tmpDate->tm_year = tmp - 1900;
-		std::cout << "Часы: ";
-		std::cin >> tmp;
-		tmpDate->tm_hour = tmp;
-		std::cout << "Минуты: ";
-		std::cin >> tmp;
-		tmpDate->tm_min = tmp;
+		char tmp[100];
+		int tmpInt;
+
+		std::cout << "\nДата (" << tmpDate->tm_mday << "): ";
+		std::cin.getline(tmp, 100);
+		if (tmp[0] != '\0' &&
+			strlen(tmp) < 3 &&
+			IsNumber(tmp))
+		{
+			tmpInt = atoi(tmp);
+			if (tmpInt > 0 &&
+				tmpInt <= 31)
+				tmpDate->tm_mday = tmpInt;
+		}
+
+		std::cout << "Месяц (" << tmpDate->tm_mon + 1 << "): ";
+		std::cin.getline(tmp, 100);
+		if (tmp[0] != '\0' &&
+			strlen(tmp) < 3 &&
+			IsNumber(tmp))
+		{
+			tmpInt = atoi(tmp);
+			if (tmpInt > 0 &&
+				tmpInt <= 12)
+				tmpDate->tm_mon = tmpInt - 1;
+		}
+
+		std::cout << "Год (" << tmpDate->tm_year + 1900 << "): ";
+		std::cin.getline(tmp, 100);
+		if (tmp[0] != '\0' &&
+			IsNumber(tmp))
+		{
+				tmpDate->tm_year = atoi(tmp);
+		}
+
+		std::cout << "Часы (" << tmpDate->tm_hour << "): ";
+		std::cin.getline(tmp, 100);
+		if (tmp[0] != '\0' &&
+			strlen(tmp) < 3 &&
+			IsNumber(tmp))
+		{
+			tmpInt = atoi(tmp);
+			if (tmpInt > 0 &&
+				tmpInt <= 23)
+				tmpDate->tm_hour = tmpInt;
+		}
+
+		std::cout << "Минуты (" << tmpDate->tm_min << "): ";
+		std::cin.getline(tmp, 100);
+		if (tmp[0] != '\0' &&
+			strlen(tmp) < 3 &&
+			IsNumber(tmp))
+		{
+			tmpInt = atoi(tmp);
+			if (tmpInt > 0 &&
+				tmpInt < 60)
+				tmpDate->tm_min = tmpInt;
+		}
+
 		tmpDate->tm_sec = 0;
 
 		time_t inSeconds = mktime(tmpDate);
