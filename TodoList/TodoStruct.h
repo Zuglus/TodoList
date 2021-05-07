@@ -2,8 +2,8 @@
 
 struct Todo
 {
-	char name[50];
+	std::string name;
 	Priority priority;
-	char description[100];
+	std::string description;
 	Date date;
 };

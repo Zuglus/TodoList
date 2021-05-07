@@ -10,19 +10,20 @@ Todo* AddTodo(Todo* oldArr, int* size)
 	delete[]oldArr;
 
 	Todo* newTodo = new Todo;
-	puts("\n<<< Создание нового дела: >>>");
-	puts("Как назовём?");
-	getchar();
-	gets_s(newTodo->name);
+	std::cout << "\n<<< Создание нового дела: >>>\n";
 
-	puts("\nВыберите приоритет:");
+	std::cout << "\nЧто нужно сделать: ";
+	getchar();
+	newTodo->name = ConsoleEnter(50);
+
+	std::cout << "\nВыберите приоритет:\n";
 	newTodo->priority = SetPriority();
 
-	puts("\nОпишите: ");
+	std::cout << "\nДобавьте подробности: ";
 	getchar();
-	gets_s(newTodo->description);
+	newTodo->description = ConsoleEnter(100);
 
-	puts("\nВведите дату и время исполнения:");
+	std::cout << "\nВведите дату и время исполнения:";
 	SetDate(&(newTodo->date));
 
 	newArr[(*size) - 1] = *newTodo;

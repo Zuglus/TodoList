@@ -1,8 +1,11 @@
 #include <windows.h>
 #include <iostream>
+#include <string>
+
 #include "Priority.h"
 #include "Date.h"
 #include "TodoStruct.h"
+#include "ConsoleEnter.h"
 #include "ShowTodo.h"
 #include "ShowTodos.h"
 #include "ShowMenu.h"

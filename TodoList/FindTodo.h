@@ -39,7 +39,7 @@ void ByName(Todo* list, int size)
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		if (IsElemIn(name, list[i].name, isIn))
+		//if (IsElemIn(name, list[i].name, isIn))
 			ShowTodo(list[i], i);
 	}
 
@@ -76,7 +76,7 @@ void ByDescription(Todo* list, int size)
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		if (IsElemIn(toFind, list[i].description, isIn))
+		//if (IsElemIn(toFind, list[i].description, isIn))
 			ShowTodo(list[i], i);
 	}
 

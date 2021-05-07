@@ -2,8 +2,8 @@
 
 void UpdateTodo(Todo* arr, int size)
 {
-	puts("\n> >> Редактирование дела: << <");
-	puts("ID дела, которое редактируем:");
+	std::cout << "\n> >> Редактирование дела: << <";
+	std::cout << "\nID дела, которое редактируем:";
 	int* id = new int;
 	while (1)
 	{
@@ -11,14 +11,14 @@ void UpdateTodo(Todo* arr, int size)
 		if (*id >= 0 &&
 			*id < size)
 			break;
-		puts("Ошибочный ID. Повторите...");
+		std::cout << "\nОшибочный ID. Повторите...";
 	}
-	puts("Варианты редактирования:");
-	puts("1 - полностью");
-	puts("2 - наименование");
-	puts("3 - приоритет");
-	puts("4 - описание");
-	puts("5 - дата");
+	std::cout << "\nВарианты редактирования:";
+	std::cout << "\n1 - полностью";
+	std::cout << "\n2 - наименование";
+	std::cout << "\n3 - приоритет";
+	std::cout << "\n4 - описание";
+	std::cout << "\n5 - дата";
 	int* answer = new int;
 	while (1)
 	{
@@ -35,33 +35,29 @@ void UpdateTodo(Todo* arr, int size)
 	switch (*answer)
 	{
 	case 1:
-		puts("Новое наименование:");
-		getchar();
-		gets_s(todo.name);
-		puts("Новый приоритет:");
+		std::cout << "Новое наименование: ";
+		todo.name = ConsoleEnter(50);
+		std::cout << "Новый приоритет: ";
 		todo.priority = SetPriority();
-		puts("Новое описание:");
-		getchar();
-		gets_s(todo.description);
-		puts("Новая дата:");
+		std::cout << "Новое описание: ";
+		todo.description = ConsoleEnter(100);
+		std::cout << "Новая дата: ";
 		SetDate(&todo.date);
 		break;
 	case 2:
-		puts("Новое наименование:");
-		getchar();
-		gets_s(todo.name);
+		std::cout << "Новое наименование: ";
+		todo.name = ConsoleEnter(50);
 		break;
 	case 3:
-		puts("Новый приоритет:");
+		std::cout << "Новый приоритет: ";
 		todo.priority = SetPriority();
 		break;
 	case 4:
-		puts("Новое описание:");
-		getchar();
-		gets_s(todo.description);
+		std::cout << "Новое описание: ";
+		todo.description = ConsoleEnter(100);
 		break;
 	case 5:
-		puts("Новая дата:");
+		std::cout << "Новая дата: ";
 		SetDate(&todo.date);
 		break;
 	}
