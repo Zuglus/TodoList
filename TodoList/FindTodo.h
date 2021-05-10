@@ -9,13 +9,14 @@ struct MenuElement
 void ByName(Todo* list, int size)
 {
 	std::cout << "По какому имени искать?\n";
-	std::string toFind = ConsoleEnter(50);
+	char* toFind = new char[50];
+	std::cin.getline(toFind, 50);
 
 	std::cout << "Ищем...";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		int finded = list[i].name.find(toFind);
+		int finded = (int)list[i].GetTodoName().find(toFind);
 		if (finded >= 0)
 		{
 			ShowTodo(list[i], i);
@@ -30,12 +31,13 @@ void ByName(Todo* list, int size)
 void ByPriority(Todo* list, int size)
 {
 	std::cout << "\nПо какому приоритету ищем? ";
-	Priority toFind = SetPriority();
+	char* toFind = new char[50];
+		std::cin.getline(toFind, 50);
 
 	std::cout << "\nИщем...\n";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
-		if (list[i].priority == toFind)
+		if (list[i].GetTodoPriority() == toFind[0])
 		{
 			isIn = true;
 			ShowTodo(list[i], i);
@@ -48,13 +50,14 @@ void ByPriority(Todo* list, int size)
 void ByDescription(Todo* list, int size)
 {
 	std::cout << "Что ищем?";
-	std::string toFind = ConsoleEnter(50);
+	char* toFind = new char[100];
+	std::cin.getline(toFind, 100);
 
 	std::cout << "Ищем...";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		int finded = list[i].description.find(toFind);
+		int finded = list[i].GetTodoDescription().find(toFind);
 		if (finded >= 0)
 		{
 			ShowTodo(list[i], i);
@@ -63,7 +66,7 @@ void ByDescription(Todo* list, int size)
 	}
 
 	if (!isIn)
-		std::cout << "\nПо этому описанию нет данных\n";
+		std::cout << "\nПо этому имени нет данных\n";
 }
 
 void ByTime(Todo* list, int size)

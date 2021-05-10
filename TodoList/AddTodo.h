@@ -13,30 +13,36 @@ Todo* AddTodo(Todo* oldArr, int* size)
 	std::cout << "\n<<< Создание новой задачи: >>>\n";
 
 	std::cout << "\nЧто нужно сделать?: ";
-	std::string* tempS = new std::string(ConsoleEnter(50));
-	if (tempS[0] != "\0")
-		newTodo->name = *tempS;
-	delete tempS;
+	char* tempS = new char[50];
+	std::cin.ignore();
+	std::cin.getline(tempS, 50);
+	if (tempS[0] != '\0')
+		newTodo->SetTodoName(tempS);
 
-	std::cout << "\nВыберите приоритет:\n";
-	tempS = new std::string(ConsoleEnter(50));
-	if (tempS[0] != "\0")
-		newTodo->priority = SetPriority();
-	delete tempS;
+	std::cout << "Выберите приоритет:\n";
+	std::cout << "1. низкий\n";
+	std::cout << "2. средний\n";
+	std::cout << "3. высокий\n";
+	std::cin.getline(tempS, 50);
+	if (tempS[0] != '\0')
+		newTodo->SetTodoPriority(tempS[0]);
 
-	std::cout << "\nДобавьте подробности: ";
-	tempS = new std::string(ConsoleEnter(100));
-	if (tempS[0] != "\0")
-		newTodo->description = *tempS;
-	delete tempS;
+	std::cout << "Добавьте подробности: ";
+	std::cin.ignore();
+	std::cin.getline(tempS, 100);
+	if (tempS[0] != '\0')
+		newTodo->SetTodoDescription(tempS);
+	delete[]tempS;
 
-	std::cout << "\nВведите дату и время исполнения:";
+	std::cout << "Введите дату и время исполнения:";
 	while (1)
 	{
 		char tmp[100];
 		int tmpInt;
+		tm* newDate = new tm;
+		*newDate = *newTodo->GetTodoLocalDate();
 
-		std::cout << "\nДата (" << newTodo->date.tm_mday << "): ";
+		std::cout << "\nДата (" << newDate->tm_mday << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -45,10 +51,10 @@ Todo* AddTodo(Todo* oldArr, int* size)
 			tmpInt = atoi(tmp);
 			if (tmpInt > 0 &&
 				tmpInt <= 31)
-				newTodo->date.tm_mday = tmpInt;
+				newDate->tm_mday = tmpInt;
 		}
 
-		std::cout << "Месяц (" << newTodo->date.tm_mon + 1 << "): ";
+		std::cout << "Месяц (" << newDate->tm_mon + 1 << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -57,18 +63,18 @@ Todo* AddTodo(Todo* oldArr, int* size)
 			tmpInt = atoi(tmp);
 			if (tmpInt > 0 &&
 				tmpInt <= 12)
-				newTodo->date.tm_mon = tmpInt - 1;
+				newDate->tm_mon = tmpInt - 1;
 		}
 
-		std::cout << "Год (" << newTodo->date.tm_year + 1900 << "): ";
+		std::cout << "Год (" << newDate->tm_year + 1900 << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			IsNumber(tmp))
 		{
-			newTodo->date.tm_year = atoi(tmp);
+			newDate->tm_year = atoi(tmp);
 		}
 
-		std::cout << "Часы (" << newTodo->date.tm_hour << "): ";
+		std::cout << "Часы (" << newDate->tm_hour << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -77,10 +83,10 @@ Todo* AddTodo(Todo* oldArr, int* size)
 			tmpInt = atoi(tmp);
 			if (tmpInt > 0 &&
 				tmpInt <= 23)
-				newTodo->date.tm_hour = tmpInt;
+				newDate->tm_hour = tmpInt;
 		}
 
-		std::cout << "Минуты (" << newTodo->date.tm_min << "): ";
+		std::cout << "Минуты (" << newDate->tm_min << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -89,14 +95,12 @@ Todo* AddTodo(Todo* oldArr, int* size)
 			tmpInt = atoi(tmp);
 			if (tmpInt > 0 &&
 				tmpInt < 60)
-				newTodo->date.tm_min = tmpInt;
+				newDate->tm_min = tmpInt;
 		}
 
-		newTodo->date.tm_sec = 0;
+		newDate->tm_sec = 0;
 
-
-		time_t inSeconds = mktime(&(*newTodo).date);
-		if (inSeconds > time(NULL))
+		if (newTodo->SetTodoDate(newDate))
 			break;
 		std::cout << "Ошибочная дата. Повторите...";
 	}

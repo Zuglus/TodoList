@@ -2,9 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "Priority.h"
 #include "TodoStruct.h"
-#include "ConsoleEnter.h"
 #include "IsNumber.h"
 #include "ShowTodo.h"
 #include "ShowTodos.h"
