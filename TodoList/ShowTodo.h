@@ -5,8 +5,8 @@ void ShowTodo(Todo todo, int id)
 	std::cout << "\nID: " << id << std::endl;
 	std::cout << "Наименование: " << todo.GetTodoName() << std::endl;
 	std::cout << "Приоритет: " << todo.GetTodoPriorityString() << std::endl;
-	std::cout << "\nПодробности: " << todo.GetTodoDescription() << std::endl;
-	std::cout << "\nСрок исполнения: ";
+	std::cout << "Подробности: " << todo.GetTodoDescription() << std::endl;
+	std::cout << "Срок исполнения: ";
 	std::cout << todo.GetTodoLocalDate()->tm_mday << '.';
 	std::cout << todo.GetTodoLocalDate()->tm_mon + 1 << '.';
 	std::cout << todo.GetTodoLocalDate()->tm_year + 1900;

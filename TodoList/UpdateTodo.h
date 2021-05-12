@@ -15,22 +15,22 @@ void UpdateTodo(Todo* arr, int size)
 	}
 
 	Todo* todo = &arr[id];
+	std::string* s;
 
 	std::cout << "Клавиша <Ввод>, чтобы оставить прежнее значение\n";
 	std::cout << "Новое наименование " << "(" << todo->GetTodoName() << "): ";
-	char* tmp = new char[50];
-	std::cin.getline(tmp, 50);
-	if (tmp[0] != '\0')
-		todo->SetTodoName(tmp);
-	delete tmp;
+	getline(std::cin, *s);
+	if (*s != "\0")
+		todo->SetTodoName(*s);
+
 	std::cout << "Новый приоритет: " << "(" << todo->GetTodoPriorityString() << "): ";
-	std::cin.getline(tmp, 50);
-	if (tmp[0] != '\0')
-		todo->SetTodoPriority(tmp[0]);
-	delete tmp;
+	getline(std::cin, *s);
+	if (*s != "\0")
+		todo->SetTodoPriority(*s);
+
 	std::cout << "Новое описание " << "(" << todo->GetTodoDescription() << "): ";
-	std::cin.getline(tmp, 100);
-	if (tmp[0] != '\0')
-		todo->SetTodoDescription(tmp);
+	getline(std::cin, *s);
+	if (*s != "\0")
+		todo->SetTodoDescription(*s);
 	std::cout << "Новая дата: ";
 }

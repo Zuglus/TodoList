@@ -2,6 +2,7 @@
 
 int ShowMenu(const char* names[], const int size, int todoSize)
 {
+	system("cls");
 	std::cout << "\nМеню:\n";
 	if (todoSize)
 		for (int i = 0; i < size; ++i)

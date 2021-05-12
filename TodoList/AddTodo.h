@@ -10,29 +10,31 @@ Todo* AddTodo(Todo* oldArr, int* size)
 	delete[]oldArr;
 
 	Todo* newTodo = new Todo;
+	std::string* s = new std::string;
+
+	system("cls");
+
 	std::cout << "\n<<< Создание новой задачи: >>>\n";
 
 	std::cout << "\nЧто нужно сделать?: ";
-	char* tempS = new char[50];
 	std::cin.ignore();
-	std::cin.getline(tempS, 50);
-	if (tempS[0] != '\0')
-		newTodo->SetTodoName(tempS);
+	getline(std::cin, *s);
+	if (*s != "\0")
+		newTodo->SetTodoName(*s);
 
 	std::cout << "Выберите приоритет:\n";
 	std::cout << "1. низкий\n";
 	std::cout << "2. средний\n";
 	std::cout << "3. высокий\n";
-	std::cin.getline(tempS, 50);
-	if (tempS[0] != '\0')
-		newTodo->SetTodoPriority(tempS[0]);
+	getline(std::cin, *s);
+	if (*s != "\0")
+		newTodo->SetTodoPriority(*s);
 
 	std::cout << "Добавьте подробности: ";
-	std::cin.ignore();
-	std::cin.getline(tempS, 100);
-	if (tempS[0] != '\0')
-		newTodo->SetTodoDescription(tempS);
-	delete[]tempS;
+	getline(std::cin, *s);
+	if (*s != "\0")
+		newTodo->SetTodoDescription(*s);
+	delete s;
 
 	std::cout << "Введите дату и время исполнения:";
 	while (1)

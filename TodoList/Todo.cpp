@@ -1,66 +1,86 @@
-#include <windows.h>
-#include <iostream>
 #include <string>
+#include <time.h>
+#include "Todo.h"
 
-#include "TodoStruct.h"
-#include "IsNumber.h"
-#include "ShowTodo.h"
-#include "ShowTodos.h"
-#include "ShowMenu.h"
-#include "AddTodo.h"
-#include "DelTodo.h"
-#include "UpdateTodo.h"
-#include "FindTodo.h"
-
-int main()
+Todo::Todo()
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-	setlocale(LC_ALL, "Russian");
+	name = "Новая задача";
+	priority = Priority::low;
+	description = "Описание новой задачи";
+	date = time(NULL) + 3600;
+}
 
-	// Массив списка дел
-	int sizeOfTodoList = 0;
-	Todo* todoList = new Todo[sizeOfTodoList];
+void Todo::SetTodoName(std::string newName)
+{
+		name = newName;
+}
 
-	// Меню выбора
-	const int sizeMenu = 6;
-	const char* menuNames[sizeMenu] = {
-		 " - Добавить дело",
-		 " - Удалить дело",
-		 " - Редактировать дело",
-		 " - Поиск дела",
-		 " - Отображение списка дел",
-		 " - Выход"
+std::string Todo::GetTodoName()
+{
+	return name;
+}
+
+void Todo::SetTodoPriority(std::string select)
+{
+	if (select >= "1" &&
+		select <= "3")
+		switch (std::stoi(select))
+		{
+		case low:
+			priority = low;
+			break;
+		case middle:
+			priority = middle;
+			break;
+		case high:
+			priority = high;
+			break;
+		}
+}
+
+Todo::Priority Todo::GetTodoPriority()
+{
+	return priority;
+}
+
+std::string Todo::GetTodoPriorityString()
+{
+	std::string priorityList[3] = {
+		"низкий",
+		"средний",
+		"высокий"
 	};
 
-	ShowTodos(todoList, sizeOfTodoList);
-	while (1)
-	{
-		int selected = ShowMenu(menuNames, sizeMenu, sizeOfTodoList);
+	return priorityList[priority];
+}
 
-		switch (selected)
-		{
-		case 1:
-			todoList = AddTodo(todoList, &sizeOfTodoList);
-			break;
-		case 2:
-			todoList = DelTodo(todoList, &sizeOfTodoList);
-			break;
-		case 3:
-			UpdateTodo(todoList, sizeOfTodoList);
-			break;
-		case 4:
-			FindTodo(todoList, sizeOfTodoList);
-			break;
-		case 5:
-			ShowTodos(todoList, sizeOfTodoList);
-			break;
-		}
+void Todo::SetTodoDescription(std::string newDescription)
+{
+		description = newDescription;
+}
 
-		if (selected == sizeMenu)
-		{
-			puts("Выход из программы...");
-			break;
-		}
-	}
+std::string Todo::GetTodoDescription()
+{
+	return description;
+}
+
+bool Todo::SetTodoDate(tm* newDate)
+{
+	time_t tmpTime = mktime(newDate);
+	if (tmpTime < time(NULL))
+		return false;
+	date = tmpTime;
+	return true;
+}
+
+time_t Todo::GetTodoDate()
+{
+	return date;
+}
+
+tm* Todo::GetTodoLocalDate()
+{
+	tm* localDate = new tm;
+	localtime_s(localDate, &date);
+	return localDate;
 }

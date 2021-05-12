@@ -140,9 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="IsNumber.cpp" />
-    <ClCompile Include="Todo.cpp">
+    <ClCompile Include="App.cpp">
       <UseUnicodeForAssemblerListing Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</UseUnicodeForAssemblerListing>
     </ClCompile>
+    <ClCompile Include="Todo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddTodo.h" />
@@ -152,7 +153,7 @@
     <ClInclude Include="ShowMenu.h" />
     <ClInclude Include="ShowTodo.h" />
     <ClInclude Include="ShowTodos.h" />
-    <ClInclude Include="TodoStruct.h" />
+    <ClInclude Include="Todo.h" />
     <ClInclude Include="UpdateTodo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
