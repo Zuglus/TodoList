@@ -19,7 +19,7 @@ void ByName(Todo* list, int size)
 		int finded = (int)list[i].GetTodoName().find(toFind);
 		if (finded >= 0)
 		{
-			ShowTodo(list[i], i);
+			list[i].showTodo(i);
 			isIn = true;
 		}
 	}
@@ -40,7 +40,7 @@ void ByPriority(Todo* list, int size)
 		if (list[i].GetTodoPriority() == toFind[0])
 		{
 			isIn = true;
-			ShowTodo(list[i], i);
+			list[i].showTodo(i);
 		}
 
 	if (!isIn)
@@ -57,10 +57,10 @@ void ByDescription(Todo* list, int size)
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		int finded = list[i].GetTodoDescription().find(toFind);
+		int finded = (int)list[i].GetTodoDescription().find(toFind);
 		if (finded >= 0)
 		{
-			ShowTodo(list[i], i);
+			list[i].showTodo(i);
 			isIn = true;
 		}
 	}

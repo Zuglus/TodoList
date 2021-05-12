@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <time.h>
 #include "Todo.h"
@@ -83,4 +84,19 @@ tm* Todo::GetTodoLocalDate()
 	tm* localDate = new tm;
 	localtime_s(localDate, &date);
 	return localDate;
+}
+
+void Todo::showTodo (int id)
+{
+	std::cout << "\nID: " << id << std::endl;
+	std::cout << "Наименование: " << GetTodoName() << std::endl;
+	std::cout << "Приоритет: " << GetTodoPriorityString() << std::endl;
+	std::cout << "Подробности: " << GetTodoDescription() << std::endl;
+	std::cout << "Срок исполнения: ";
+	std::cout << GetTodoLocalDate()->tm_mday << '.';
+	std::cout << GetTodoLocalDate()->tm_mon + 1 << '.';
+	std::cout << GetTodoLocalDate()->tm_year + 1900;
+	std::cout << " к " << GetTodoLocalDate()->tm_hour;
+	std::cout << ':' << GetTodoLocalDate()->tm_min;
+	std::cout << std::endl;
 }

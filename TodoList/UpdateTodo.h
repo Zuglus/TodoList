@@ -15,7 +15,7 @@ void UpdateTodo(Todo* arr, int size)
 	}
 
 	Todo* todo = &arr[id];
-	std::string* s;
+	std::string* s = NULL;
 
 	std::cout << "Клавиша <Ввод>, чтобы оставить прежнее значение\n";
 	std::cout << "Новое наименование " << "(" << todo->GetTodoName() << "): ";

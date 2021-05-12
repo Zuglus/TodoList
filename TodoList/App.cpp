@@ -3,11 +3,9 @@
 #include <string>
 
 #include "Todo.h"
+#include "TodoList.h"
+#include "Menu.h"
 #include "IsNumber.h"
-#include "ShowTodo.h"
-#include "ShowTodos.h"
-#include "ShowMenu.h"
-#include "AddTodo.h"
 #include "DelTodo.h"
 #include "UpdateTodo.h"
 #include "FindTodo.h"
@@ -19,47 +17,25 @@ int main()
 	setlocale(LC_ALL, "Russian");
 
 	// Массив списка дел
-	int sizeOfTodoList = 0;
-	Todo* todoList = new Todo[sizeOfTodoList];
+	TodoList* todoList = new TodoList;
+
+	todoList->showTodoList();
 
 	// Меню выбора
-	const int sizeMenu = 6;
-	const char* menuNames[sizeMenu] = {
-		 " - Добавить дело",
-		 " - Удалить дело",
-		 " - Редактировать дело",
-		 " - Поиск дела",
-		 " - Отображение списка дел",
-		 " - Выход"
-	};
-
-	ShowTodos(todoList, sizeOfTodoList);
+	Menu* menu = new Menu;
+	
 	while (1)
 	{
-		int selected = ShowMenu(menuNames, sizeMenu, sizeOfTodoList);
+		menu->show(todoList->getListLength());
+		int select = menu->getSelect(todoList->getListLength());
 
-		switch (selected)
+		switch (select)
 		{
 		case 1:
-			todoList = AddTodo(todoList, &sizeOfTodoList);
-			break;
-		case 2:
-			todoList = DelTodo(todoList, &sizeOfTodoList);
-			break;
-		case 3:
-			UpdateTodo(todoList, sizeOfTodoList);
-			break;
-		case 4:
-			FindTodo(todoList, sizeOfTodoList);
+			todoList->addTodo();
 			break;
 		case 5:
-			ShowTodos(todoList, sizeOfTodoList);
-			break;
-		}
-
-		if (selected == sizeMenu)
-		{
-			puts("Выход из программы...");
+			todoList->showTodoList();
 			break;
 		}
 	}

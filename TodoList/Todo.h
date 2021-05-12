@@ -23,5 +23,6 @@ public:
 	std::string GetTodoPriorityString();
 	std::string GetTodoDescription();
 	time_t GetTodoDate();
-	tm* GetTodoLocalDate();	
+	tm* GetTodoLocalDate();
+	void showTodo(int);
 };
