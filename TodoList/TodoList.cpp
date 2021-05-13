@@ -15,6 +15,7 @@ int TodoList::getListLength()
 {
 	return listLength;
 }
+
 void TodoList::showTodoList()
 {
 	system("cls");
@@ -23,7 +24,7 @@ void TodoList::showTodoList()
 	if (listLength)
 		for (int i = 0; i < listLength; ++i)
 		{
-			todoList->showTodo(i);
+			todoList[i].showTodo(i);
 		}
 	else
 		std::cout << "\nДел не запланировано!!!\n";
@@ -38,6 +39,8 @@ void TodoList::addTodo()
 
 	delete[]todoList;
 	todoList = newList;
+
+	newList = nullptr;
 
 	Todo* newTodo = new Todo;
 	std::string* s = new std::string;
@@ -136,7 +139,7 @@ void TodoList::addTodo()
 		std::cout << "Ошибочная дата. Повторите...";
 	}
 
-	newList[listLength - 1] = *newTodo;
+	todoList[listLength - 1] = *newTodo;
 
 	system("cls");
 	std::cout << "\n\t<<<Задача добавлена>>>\n\n";

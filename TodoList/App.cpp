@@ -34,6 +34,15 @@ int main()
 		case 1:
 			todoList->addTodo();
 			break;
+		case 2:
+			todoList->deleteTodo();
+			break;
+		case 3:
+			todoList->updateTodo();
+			break;
+		case 4:
+			todoList->findTodo();
+			break;
 		case 5:
 			todoList->showTodoList();
 			break;

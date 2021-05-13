@@ -10,7 +10,6 @@ public:
 	void deleteTodo();
 	void updateTodo();
 	void findTodo();
-
 private:
 	int listLength;
 	Todo* todoList;

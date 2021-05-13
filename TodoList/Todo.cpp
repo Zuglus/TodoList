@@ -27,14 +27,14 @@ void Todo::SetTodoPriority(std::string select)
 		select <= "3")
 		switch (std::stoi(select))
 		{
-		case low:
-			priority = low;
+		case 1:
+			priority = Priority::low;
 			break;
-		case middle:
-			priority = middle;
+		case 2:
+			priority = Priority::middle;
 			break;
-		case high:
-			priority = high;
+		case 3:
+			priority = Priority::high;
 			break;
 		}
 }
@@ -52,7 +52,7 @@ std::string Todo::GetTodoPriorityString()
 		"высокий"
 	};
 
-	return priorityList[priority];
+	return priorityList[(int)priority];
 }
 
 void Todo::SetTodoDescription(std::string newDescription)

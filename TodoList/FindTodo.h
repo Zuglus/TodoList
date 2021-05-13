@@ -37,7 +37,7 @@ void ByPriority(Todo* list, int size)
 	std::cout << "\nИщем...\n";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
-		if (list[i].GetTodoPriority() == toFind[0])
+		if ((int)list[i].GetTodoPriority() == toFind[0])
 		{
 			isIn = true;
 			list[i].showTodo(i);

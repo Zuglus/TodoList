@@ -3,12 +3,12 @@
 class Todo
 {
 	std::string name;
-	enum Priority
-	{
-	low,
-	middle,
-	high
-	} priority;
+	enum class Priority {
+		low,
+		middle,
+		high
+	};
+	Priority priority;
 	std::string description;
 	time_t date;
 
