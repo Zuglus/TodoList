@@ -194,6 +194,49 @@ void TodoList::del()
 	todoList = newArr;
 }
 
-void TodoList::update() {}
+void TodoList::update()
+{
+	system("cls");
+	std::cout << " <<< Редактирование задачи >>>\n";
+	std::cout << "ID задачи, которую редактируем: ";
+	int id;
+	std::string userEnter;
+	while (1)
+	{
+		getline(std::cin, userEnter);
+		id = (int)userEnter.find_first_of("1234567890");
+		if (id >= 0)
+		{
+			id = userEnter[id] - '0';
+			if (id < _length)
+				break;
+		}
+		else
+		{
+			std::cout << "\nОшибочный ID. Повторите...\n";
+		}
+	}
+
+	Todo* todo = &todoList[id];
+
+	std::cout << "Клавиша <Ввод>, чтобы оставить прежнее значение\n";
+	std::cout << "Новое наименование " << "(" << todo->name() << "): ";
+	
+	getline(std::cin, userEnter);
+	if (!userEnter.empty())
+		todo->name();
+
+	std::cout << "Новый приоритет: " << "(" << todo->priorityString() << "): ";
+	getline(std::cin, userEnter);
+	if (!userEnter.empty())
+		todo->priority(userEnter);
+
+	std::cout << "Новое описание " << "(" << todo->description() << "): ";
+	getline(std::cin, userEnter);
+	if (!userEnter.empty())
+		todo->description(userEnter);
+	std::cout << "Новая дата: ";
+}
+
 void TodoList::find() {}
 
