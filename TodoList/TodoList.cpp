@@ -7,34 +7,45 @@
 
 TodoList::TodoList()
 {
-	listLength = 0;
-	todoList = new Todo[listLength];
+	_length = 0;
+	todoList = new Todo[_length];
+	methodsArr = new (void(TodoList:: * [5])()){
+	&TodoList::add,
+	&TodoList::del,
+	&TodoList::update,
+	&TodoList::find,
+	&TodoList::show
+	};
 }
 
-int TodoList::getListLength()
+void TodoList::useSelect(int select)
 {
-	return listLength;
+	(this->*methodsArr[select])();
 }
 
-void TodoList::showTodoList()
+int TodoList::length()
+{
+	return _length;
+}
+
+void TodoList::show()
 {
 	system("cls");
 	std::cout << "\t>>> Список дел: <<<\n";
 
-	if (listLength)
-		for (int i = 0; i < listLength; ++i)
+	if (_length)
+		for (int i = 0; i < _length; ++i)
 		{
-			todoList[i].showTodo(i);
+			todoList[i].show(i);
 		}
 	else
 		std::cout << "\nДел не запланировано!!!\n";
 }
-void TodoList::addTodo()
+void TodoList::add()
 {
-	listLength++;
-	Todo* newList = new Todo[listLength];
+	Todo* newList = new Todo[++_length];
 
-	for (int i = 0; i < listLength - 1; ++i)
+	for (int i = 0; i < _length - 1; ++i)
 		newList[i] = todoList[i];
 
 	delete[]todoList;
@@ -52,7 +63,7 @@ void TodoList::addTodo()
 	std::cout << "\nЧто нужно сделать?: ";
 	getline(std::cin, *s);
 	if (!s->empty())
-		newTodo->SetTodoName(*s);
+		newTodo->name(*s);
 
 	std::cout << "Выберите приоритет:\n";
 	std::cout << "1. низкий\n";
@@ -60,12 +71,12 @@ void TodoList::addTodo()
 	std::cout << "3. высокий\n";
 	getline(std::cin, *s);
 	if (!s->empty())
-		newTodo->SetTodoPriority(*s);
+		newTodo->priority(*s);
 
 	std::cout << "Добавьте подробности: ";
 	getline(std::cin, *s);
 	if (!s->empty())
-		newTodo->SetTodoDescription(*s);
+		newTodo->description(*s);
 	delete s;
 
 	std::cout << "Введите дату и время исполнения:";
@@ -74,7 +85,7 @@ void TodoList::addTodo()
 		char tmp[100];
 		int tmpInt;
 		tm* newDate = new tm;
-		*newDate = *newTodo->GetTodoLocalDate();
+		*newDate = *newTodo->localDate();
 
 		std::cout << "\nДата (" << newDate->tm_mday << "): ";
 		std::cin.getline(tmp, 100);
@@ -134,18 +145,56 @@ void TodoList::addTodo()
 
 		newDate->tm_sec = 0;
 
-		if (newTodo->SetTodoDate(newDate))
+		if (newTodo->date(newDate))
 			break;
 		std::cout << "Ошибочная дата. Повторите...";
 	}
 
-	todoList[listLength - 1] = *newTodo;
+	todoList[_length - 1] = *newTodo;
 
 	system("cls");
 	std::cout << "\n\t<<<Задача добавлена>>>\n\n";
 }
-void TodoList::deleteTodo(){}
-void TodoList::updateTodo(){}
-void TodoList::findTodo(){}
+void TodoList::del()
+{
+	Todo* newArr = new Todo[--_length];
+
+	system("cls");
+	std::cout << " <<< Удаление одной из задач >>>\n";
+	std::cout << "Введите ID: ";
+	std::string userInput;
+	int id;
+	while (1)
+	{
+		getline(std::cin, userInput);
+		id = (int)userInput.find_first_of("1234567890");
+		if (id >= 0)
+		{
+			id = userInput[id] - '0';
+			if (id <= _length)
+				break;
+		}
+		else
+			std::cout << "Ошибочный ввод. Повторите...";
+	}
+
+	for (int i = 0; i < _length; ++i)
+	{
+		if (i < id)
+			newArr[i] = todoList[i];
+		else
+			newArr[i] = todoList[i + 1];
+	}
+
+	system("cls");
+
+	std::cout << "Дело с ID: " << id << " удалено.\n";
+
+	delete[]todoList;
+	todoList = newArr;
+}
+
+void TodoList::update(){}
+void TodoList::find(){}
 
 	

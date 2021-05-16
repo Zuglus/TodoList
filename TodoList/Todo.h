@@ -2,27 +2,27 @@
 
 class Todo
 {
-	std::string name;
+	std::string _name;
 	enum class Priority {
 		low,
 		middle,
 		high
 	};
-	Priority priority;
-	std::string description;
-	time_t date;
+	Priority _priority;
+	std::string _description;
+	time_t _date;
 
 public:
 	Todo();
-	void SetTodoName(std::string);
-	void SetTodoPriority(std::string);
-	void SetTodoDescription(std::string);
-	bool SetTodoDate(tm*);
-	std::string GetTodoName();
-	Priority GetTodoPriority();
-	std::string GetTodoPriorityString();
-	std::string GetTodoDescription();
-	time_t GetTodoDate();
-	tm* GetTodoLocalDate();
-	void showTodo(int);
+	void name(std::string);
+	void priority(std::string);
+	void description(std::string);
+	bool date(tm*);
+	std::string name();
+	Priority priority();
+	std::string priorityString();
+	std::string description();
+	time_t date();
+	tm* localDate();
+	void show(int);
 };

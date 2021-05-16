@@ -19,33 +19,16 @@ int main()
 	// Массив списка дел
 	TodoList* todoList = new TodoList;
 
-	todoList->showTodoList();
+	todoList->show();
 
 	// Меню выбора
 	Menu* menu = new Menu;
+	Todo x;
 	
 	while (1)
 	{
-		menu->show(todoList->getListLength());
-		int select = menu->getSelect(todoList->getListLength());
-
-		switch (select)
-		{
-		case 1:
-			todoList->addTodo();
-			break;
-		case 2:
-			todoList->deleteTodo();
-			break;
-		case 3:
-			todoList->updateTodo();
-			break;
-		case 4:
-			todoList->findTodo();
-			break;
-		case 5:
-			todoList->showTodoList();
-			break;
-		}
+		menu->show(todoList->length());
+		int select = menu->getSelect(todoList->length());
+		todoList->useSelect(select - 1);
 	}
 }

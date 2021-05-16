@@ -5,46 +5,46 @@
 
 Todo::Todo()
 {
-	name = "Новая задача";
-	priority = Priority::low;
-	description = "Описание новой задачи";
-	date = time(NULL) + 3600;
+	_name = "Новая задача";
+	_priority = Priority::low;
+	_description = "Описание новой задачи";
+	_date = time(NULL) + 3600;
 }
 
-void Todo::SetTodoName(std::string newName)
+void Todo::name(std::string newName)
 {
-		name = newName;
+		_name = newName;
 }
 
-std::string Todo::GetTodoName()
+std::string Todo::name()
 {
-	return name;
+	return _name;
 }
 
-void Todo::SetTodoPriority(std::string select)
+void Todo::priority(std::string select)
 {
 	if (select >= "1" &&
 		select <= "3")
 		switch (std::stoi(select))
 		{
 		case 1:
-			priority = Priority::low;
+			_priority = Priority::low;
 			break;
 		case 2:
-			priority = Priority::middle;
+			_priority = Priority::middle;
 			break;
 		case 3:
-			priority = Priority::high;
+			_priority = Priority::high;
 			break;
 		}
 }
 
-Todo::Priority Todo::GetTodoPriority()
+Todo::Priority Todo::priority()
 {
-	return priority;
+	return _priority;
 }
 
-std::string Todo::GetTodoPriorityString()
+std::string Todo::priorityString()
 {
 	std::string priorityList[3] = {
 		"низкий",
@@ -52,51 +52,51 @@ std::string Todo::GetTodoPriorityString()
 		"высокий"
 	};
 
-	return priorityList[(int)priority];
+	return priorityList[(int)_priority];
 }
 
-void Todo::SetTodoDescription(std::string newDescription)
+void Todo::description(std::string newDescription)
 {
-		description = newDescription;
+		_description = newDescription;
 }
 
-std::string Todo::GetTodoDescription()
+std::string Todo::description()
 {
-	return description;
+	return _description;
 }
 
-bool Todo::SetTodoDate(tm* newDate)
+bool Todo::date(tm* newDate)
 {
 	time_t tmpTime = mktime(newDate);
 	if (tmpTime < time(NULL))
 		return false;
-	date = tmpTime;
+	_date = tmpTime;
 	return true;
 }
 
-time_t Todo::GetTodoDate()
+time_t Todo::date()
 {
-	return date;
+	return _date;
 }
 
-tm* Todo::GetTodoLocalDate()
+tm* Todo::localDate()
 {
 	tm* localDate = new tm;
-	localtime_s(localDate, &date);
+	localtime_s(localDate, &_date);
 	return localDate;
 }
 
-void Todo::showTodo (int id)
+void Todo::show (int id)
 {
 	std::cout << "\nID: " << id << std::endl;
-	std::cout << "Наименование: " << GetTodoName() << std::endl;
-	std::cout << "Приоритет: " << GetTodoPriorityString() << std::endl;
-	std::cout << "Подробности: " << GetTodoDescription() << std::endl;
+	std::cout << "Наименование: " << name() << std::endl;
+	std::cout << "Приоритет: " << priorityString() << std::endl;
+	std::cout << "Подробности: " << description() << std::endl;
 	std::cout << "Срок исполнения: ";
-	std::cout << GetTodoLocalDate()->tm_mday << '.';
-	std::cout << GetTodoLocalDate()->tm_mon + 1 << '.';
-	std::cout << GetTodoLocalDate()->tm_year + 1900;
-	std::cout << " к " << GetTodoLocalDate()->tm_hour;
-	std::cout << ':' << GetTodoLocalDate()->tm_min;
+	std::cout << localDate()->tm_mday << '.';
+	std::cout << localDate()->tm_mon + 1 << '.';
+	std::cout << localDate()->tm_year + 1900;
+	std::cout << " к " << localDate()->tm_hour;
+	std::cout << ':' << localDate()->tm_min;
 	std::cout << std::endl;
 }

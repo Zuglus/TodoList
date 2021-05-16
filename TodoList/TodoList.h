@@ -4,14 +4,16 @@ class TodoList
 {
 public:
 	TodoList();
-	int getListLength();
-	void showTodoList();
-	void addTodo();
-	void deleteTodo();
-	void updateTodo();
-	void findTodo();
+	int length();
+	void show();
+	void add();
+	void del();
+	void update();
+	void find();
+	void useSelect(int);
 private:
-	int listLength;
+	int _length;
 	Todo* todoList;
+	void(TodoList::** methodsArr)();
 };
 

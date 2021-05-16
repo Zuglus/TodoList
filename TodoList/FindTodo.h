@@ -16,10 +16,10 @@ void ByName(Todo* list, int size)
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		int finded = (int)list[i].GetTodoName().find(toFind);
+		int finded = (int)list[i].name().find(toFind);
 		if (finded >= 0)
 		{
-			list[i].showTodo(i);
+			list[i].show(i);
 			isIn = true;
 		}
 	}
@@ -37,10 +37,10 @@ void ByPriority(Todo* list, int size)
 	std::cout << "\nИщем...\n";
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
-		if ((int)list[i].GetTodoPriority() == toFind[0])
+		if ((int)list[i].priority() == toFind[0])
 		{
 			isIn = true;
-			list[i].showTodo(i);
+			list[i].show(i);
 		}
 
 	if (!isIn)
@@ -57,10 +57,10 @@ void ByDescription(Todo* list, int size)
 	bool isIn = false;
 	for (int i = 0; i < size; ++i)
 	{
-		int finded = (int)list[i].GetTodoDescription().find(toFind);
+		int finded = (int)list[i].description().find(toFind);
 		if (finded >= 0)
 		{
-			list[i].showTodo(i);
+			list[i].show(i);
 			isIn = true;
 		}
 	}

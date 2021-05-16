@@ -148,7 +148,6 @@
     <ClCompile Include="TodoList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DelTodo.h" />
     <ClInclude Include="FindTodo.h" />
     <ClInclude Include="IsNumber.h" />
     <ClInclude Include="Menu.h" />

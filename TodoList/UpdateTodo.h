@@ -18,19 +18,19 @@ void UpdateTodo(Todo* arr, int size)
 	std::string* s = new std::string;
 
 	std::cout << "Клавиша <Ввод>, чтобы оставить прежнее значение\n";
-	std::cout << "Новое наименование " << "(" << todo->GetTodoName() << "): ";
+	std::cout << "Новое наименование " << "(" << todo->name() << "): ";
 	getline(std::cin, *s);
 	if (*s != "\0")
-		todo->SetTodoName(*s);
+		todo->name(*s);
 
-	std::cout << "Новый приоритет: " << "(" << todo->GetTodoPriorityString() << "): ";
+	std::cout << "Новый приоритет: " << "(" << todo->priorityString() << "): ";
 	getline(std::cin, *s);
 	if (*s != "\0")
-		todo->SetTodoPriority(*s);
+		todo->priority(*s);
 
-	std::cout << "Новое описание " << "(" << todo->GetTodoDescription() << "): ";
+	std::cout << "Новое описание " << "(" << todo->description() << "): ";
 	getline(std::cin, *s);
 	if (*s != "\0")
-		todo->SetTodoDescription(*s);
+		todo->description(*s);
 	std::cout << "Новая дата: ";
 }
