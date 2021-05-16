@@ -1,19 +1,19 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include <time.h>
 #include "Todo.h"
 
 Todo::Todo()
 {
-	_name = "Новая задача";
+	_name = "РќРѕРІР°СЏ Р·Р°РґР°С‡Р°";
 	_priority = Priority::low;
-	_description = "Описание новой задачи";
+	_description = "РћРїРёСЃР°РЅРёРµ РЅРѕРІРѕР№ Р·Р°РґР°С‡Рё";
 	_date = time(NULL) + 3600;
 }
 
 void Todo::name(std::string newName)
 {
-		_name = newName;
+	_name = newName;
 }
 
 std::string Todo::name()
@@ -47,9 +47,9 @@ Todo::Priority Todo::priority()
 std::string Todo::priorityString()
 {
 	std::string priorityList[3] = {
-		"низкий",
-		"средний",
-		"высокий"
+		"РЅРёР·РєРёР№",
+		"СЃСЂРµРґРЅРёР№",
+		"РІС‹СЃРѕРєРёР№"
 	};
 
 	return priorityList[(int)_priority];
@@ -57,7 +57,7 @@ std::string Todo::priorityString()
 
 void Todo::description(std::string newDescription)
 {
-		_description = newDescription;
+	_description = newDescription;
 }
 
 std::string Todo::description()
@@ -86,17 +86,17 @@ tm* Todo::localDate()
 	return localDate;
 }
 
-void Todo::show (int id)
+void Todo::show(int id)
 {
 	std::cout << "\nID: " << id << std::endl;
-	std::cout << "Наименование: " << name() << std::endl;
-	std::cout << "Приоритет: " << priorityString() << std::endl;
-	std::cout << "Подробности: " << description() << std::endl;
-	std::cout << "Срок исполнения: ";
+	std::cout << "РќР°РёРјРµРЅРѕРІР°РЅРёРµ: " << name() << std::endl;
+	std::cout << "РџСЂРёРѕСЂРёС‚РµС‚: " << priorityString() << std::endl;
+	std::cout << "РџРѕРґСЂРѕР±РЅРѕСЃС‚Рё: " << description() << std::endl;
+	std::cout << "РЎСЂРѕРє РёСЃРїРѕР»РЅРµРЅРёСЏ: ";
 	std::cout << localDate()->tm_mday << '.';
 	std::cout << localDate()->tm_mon + 1 << '.';
 	std::cout << localDate()->tm_year + 1900;
-	std::cout << " к " << localDate()->tm_hour;
+	std::cout << " Рє " << localDate()->tm_hour;
 	std::cout << ':' << localDate()->tm_min;
 	std::cout << std::endl;
 }

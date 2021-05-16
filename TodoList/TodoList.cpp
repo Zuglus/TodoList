@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include <Windows.h>
 #include "Todo.h"
@@ -31,7 +31,7 @@ int TodoList::length()
 void TodoList::show()
 {
 	system("cls");
-	std::cout << "\t>>> Список дел: <<<\n";
+	std::cout << "\t>>> РЎРїРёСЃРѕРє РґРµР»: <<<\n";
 
 	if (_length)
 		for (int i = 0; i < _length; ++i)
@@ -39,7 +39,7 @@ void TodoList::show()
 			todoList[i].show(i);
 		}
 	else
-		std::cout << "\nДел не запланировано!!!\n";
+		std::cout << "\nР”РµР» РЅРµ Р·Р°РїР»Р°РЅРёСЂРѕРІР°РЅРѕ!!!\n";
 }
 void TodoList::add()
 {
@@ -58,28 +58,28 @@ void TodoList::add()
 
 	system("cls");
 
-	std::cout << "\t\n<<< Создание новой задачи: >>>\n";
+	std::cout << "\t\n<<< РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕР№ Р·Р°РґР°С‡Рё: >>>\n";
 
-	std::cout << "\nЧто нужно сделать?: ";
+	std::cout << "\nР§С‚Рѕ РЅСѓР¶РЅРѕ СЃРґРµР»Р°С‚СЊ?: ";
 	getline(std::cin, *s);
 	if (!s->empty())
 		newTodo->name(*s);
 
-	std::cout << "Выберите приоритет:\n";
-	std::cout << "1. низкий\n";
-	std::cout << "2. средний\n";
-	std::cout << "3. высокий\n";
+	std::cout << "Р’С‹Р±РµСЂРёС‚Рµ РїСЂРёРѕСЂРёС‚РµС‚:\n";
+	std::cout << "1. РЅРёР·РєРёР№\n";
+	std::cout << "2. СЃСЂРµРґРЅРёР№\n";
+	std::cout << "3. РІС‹СЃРѕРєРёР№\n";
 	getline(std::cin, *s);
 	if (!s->empty())
 		newTodo->priority(*s);
 
-	std::cout << "Добавьте подробности: ";
+	std::cout << "Р”РѕР±Р°РІСЊС‚Рµ РїРѕРґСЂРѕР±РЅРѕСЃС‚Рё: ";
 	getline(std::cin, *s);
 	if (!s->empty())
 		newTodo->description(*s);
 	delete s;
 
-	std::cout << "Введите дату и время исполнения:";
+	std::cout << "Р’РІРµРґРёС‚Рµ РґР°С‚Сѓ Рё РІСЂРµРјСЏ РёСЃРїРѕР»РЅРµРЅРёСЏ:";
 	while (1)
 	{
 		char tmp[100];
@@ -87,7 +87,7 @@ void TodoList::add()
 		tm* newDate = new tm;
 		*newDate = *newTodo->localDate();
 
-		std::cout << "\nДата (" << newDate->tm_mday << "): ";
+		std::cout << "\nР”Р°С‚Р° (" << newDate->tm_mday << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -99,7 +99,7 @@ void TodoList::add()
 				newDate->tm_mday = tmpInt;
 		}
 
-		std::cout << "Месяц (" << newDate->tm_mon + 1 << "): ";
+		std::cout << "РњРµСЃСЏС† (" << newDate->tm_mon + 1 << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -111,7 +111,7 @@ void TodoList::add()
 				newDate->tm_mon = tmpInt - 1;
 		}
 
-		std::cout << "Год (" << newDate->tm_year + 1900 << "): ";
+		std::cout << "Р“РѕРґ (" << newDate->tm_year + 1900 << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			IsNumber(tmp))
@@ -119,7 +119,7 @@ void TodoList::add()
 			newDate->tm_year = atoi(tmp);
 		}
 
-		std::cout << "Часы (" << newDate->tm_hour << "): ";
+		std::cout << "Р§Р°СЃС‹ (" << newDate->tm_hour << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -131,7 +131,7 @@ void TodoList::add()
 				newDate->tm_hour = tmpInt;
 		}
 
-		std::cout << "Минуты (" << newDate->tm_min << "): ";
+		std::cout << "РњРёРЅСѓС‚С‹ (" << newDate->tm_min << "): ";
 		std::cin.getline(tmp, 100);
 		if (tmp[0] != '\0' &&
 			strlen(tmp) < 3 &&
@@ -147,21 +147,21 @@ void TodoList::add()
 
 		if (newTodo->date(newDate))
 			break;
-		std::cout << "Ошибочная дата. Повторите...";
+		std::cout << "РћС€РёР±РѕС‡РЅР°СЏ РґР°С‚Р°. РџРѕРІС‚РѕСЂРёС‚Рµ...";
 	}
 
 	todoList[_length - 1] = *newTodo;
 
 	system("cls");
-	std::cout << "\n\t<<<Задача добавлена>>>\n\n";
+	std::cout << "\n\t<<<Р—Р°РґР°С‡Р° РґРѕР±Р°РІР»РµРЅР°>>>\n\n";
 }
 void TodoList::del()
 {
 	Todo* newArr = new Todo[--_length];
 
 	system("cls");
-	std::cout << " <<< Удаление одной из задач >>>\n";
-	std::cout << "Введите ID: ";
+	std::cout << " <<< РЈРґР°Р»РµРЅРёРµ РѕРґРЅРѕР№ РёР· Р·Р°РґР°С‡ >>>\n";
+	std::cout << "Р’РІРµРґРёС‚Рµ ID: ";
 	std::string userInput;
 	int id;
 	while (1)
@@ -175,7 +175,7 @@ void TodoList::del()
 				break;
 		}
 		else
-			std::cout << "Ошибочный ввод. Повторите...";
+			std::cout << "РћС€РёР±РѕС‡РЅС‹Р№ РІРІРѕРґ. РџРѕРІС‚РѕСЂРёС‚Рµ...";
 	}
 
 	for (int i = 0; i < _length; ++i)
@@ -188,13 +188,12 @@ void TodoList::del()
 
 	system("cls");
 
-	std::cout << "Дело с ID: " << id << " удалено.\n";
+	std::cout << "Р”РµР»Рѕ СЃ ID: " << id << " СѓРґР°Р»РµРЅРѕ.\n";
 
 	delete[]todoList;
 	todoList = newArr;
 }
 
-void TodoList::update(){}
-void TodoList::find(){}
+void TodoList::update() {}
+void TodoList::find() {}
 
-	

@@ -1,3 +1,3 @@
-#pragma once
+﻿#pragma once
 
 bool IsNumber(char* elem);

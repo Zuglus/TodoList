@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <iostream>
 #include <string>
 
@@ -6,7 +6,6 @@
 #include "TodoList.h"
 #include "Menu.h"
 #include "IsNumber.h"
-#include "DelTodo.h"
 #include "UpdateTodo.h"
 #include "FindTodo.h"
 
@@ -16,15 +15,15 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
 
-	// Ìàññèâ ñïèñêà äåë
+	// ÐœÐ°ÑÑÐ¸Ð² ÑÐ¿Ð¸ÑÐºÐ° Ð´ÐµÐ»
 	TodoList* todoList = new TodoList;
 
 	todoList->show();
 
-	// Ìåíþ âûáîðà
+	// ÐœÐµÐ½ÑŽ Ð²Ñ‹Ð±Ð¾Ñ€Ð°
 	Menu* menu = new Menu;
 	Todo x;
-	
+
 	while (1)
 	{
 		menu->show(todoList->length());

@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include "Menu.h"
 
@@ -6,18 +6,18 @@ Menu::Menu()
 {
 	menuLength = 6;
 	menuList = new std::string[]{
-		" - Добавить дело",
-		" - Удалить дело",
-		" - Редактировать дело",
-		" - Поиск дела",
-		" - Отображение списка дел",
-		" - Выход"
+		" - Р”РѕР±Р°РІРёС‚СЊ РґРµР»Рѕ",
+		" - РЈРґР°Р»РёС‚СЊ РґРµР»Рѕ",
+		" - Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РґРµР»Рѕ",
+		" - РџРѕРёСЃРє РґРµР»Р°",
+		" - РћС‚РѕР±СЂР°Р¶РµРЅРёРµ СЃРїРёСЃРєР° РґРµР»",
+		" - Р’С‹С…РѕРґ"
 	};
 }
 
 void Menu::show(bool isLongMenu)
 {
-	std::cout << "\n\t<<< Меню: >>>\n\n";
+	std::cout << "\n\t<<< РњРµРЅСЋ: >>>\n\n";
 
 	if (isLongMenu)
 		for (int i = 0; i < menuLength; ++i)
@@ -31,7 +31,7 @@ void Menu::show(bool isLongMenu)
 
 int Menu::getSelect(bool isLongMenu)
 {
-	std::cout << "\nВаш выбор: ";
+	std::cout << "\nР’Р°С€ РІС‹Р±РѕСЂ: ";
 	std::string select;
 	int selected = -1;
 	while (1)
@@ -49,7 +49,7 @@ int Menu::getSelect(bool isLongMenu)
 				break;
 		}
 
-		std::cout << "Ошибочный выбор. Повторите...\n-->";
+		std::cout << "РћС€РёР±РѕС‡РЅС‹Р№ РІС‹Р±РѕСЂ. РџРѕРІС‚РѕСЂРёС‚Рµ...\n-->";
 	}
 
 	if (selected == menuLength &&
@@ -58,7 +58,7 @@ int Menu::getSelect(bool isLongMenu)
 		!isLongMenu)
 	{
 		system("cls");
-		std::cout << "\nОсуществляется выход...\n";
+		std::cout << "\nРћСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ РІС‹С…РѕРґ...\n";
 		exit(100);
 	}
 
