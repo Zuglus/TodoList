@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "Todo.h"
+
 class TodoList
 {
 public:
@@ -10,10 +12,29 @@ public:
 	void del();
 	void update();
 	void find();
+	void exit();
 	void useSelect(int);
+
+	class FindMenu
+	{
+	public:
+		FindMenu();
+		std::vector <std::string>* name;
+		std::vector <void(TodoList::*)()>* func;
+	};
+	class MenuElement
+	{
+	public:
+		MenuElement();
+		std::vector <std::string>* name;
+		std::vector <void(TodoList::*)()>* func;
+	};
+	MenuElement* menuList;
 private:
-	int _length;
-	Todo* todoList;
-	void(TodoList::** methodsArr)();
+	std::vector <Todo>* todoList;
+	void byName();
+	void byPriority();
+	void byDescription();
+	void byTime();
 };
 

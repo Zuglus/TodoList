@@ -1,31 +1,57 @@
 ﻿#include <iostream>
 #include <string>
 #include <Windows.h>
+#include <vector>
 #include "Todo.h"
 #include "TodoList.h"
 #include "IsNumber.h"
+#include "Menu.h"
 
-TodoList::TodoList()
+TodoList::FindMenu::FindMenu()
 {
-	_length = 0;
-	todoList = new Todo[_length];
-	methodsArr = new (void(TodoList:: * [5])()){
-	&TodoList::add,
-	&TodoList::del,
-	&TodoList::update,
-	&TodoList::find,
-	&TodoList::show
+	name = new std::vector <std::string>{
+		" - названию",
+		" - приоритету",
+		" - описанию",
+		" - времени"
+	};
+	func = new std::vector <void (TodoList::*)()>{
+		&TodoList::byName,
+		&TodoList::byPriority,
+		&TodoList::byDescription,
+		&TodoList::byTime
 	};
 }
 
-void TodoList::useSelect(int select)
+TodoList::MenuElement::MenuElement()
 {
-	(this->*methodsArr[select])();
+	name = new std::vector <std::string>{
+		" - Добавить дело",
+		" - Удалить дело",
+		" - Редактировать дело",
+		" - Поиск дела",
+		" - Отображение списка дел",
+		" - Выход"
+	};
+	func = new std::vector <void (TodoList::*)()>{
+		&TodoList::add,
+		&TodoList::del,
+		&TodoList::update,
+		&TodoList::find,
+		&TodoList::show,
+		&TodoList::exit
+	};
+}
+
+TodoList::TodoList()
+{
+	todoList = new std::vector <Todo>;
+	menuList = new MenuElement;
 }
 
 int TodoList::length()
 {
-	return _length;
+	return (int)todoList->size();
 }
 
 void TodoList::show()
@@ -33,27 +59,17 @@ void TodoList::show()
 	system("cls");
 	std::cout << "\t>>> Список дел: <<<\n";
 
-	if (_length)
-		for (int i = 0; i < _length; ++i)
+	if (!todoList->empty())
+		for (int i = 0; i < todoList->size(); ++i)
 		{
-			todoList[i].show(i);
+			(todoList->at(i)).show(i);
 		}
 	else
 		std::cout << "\nДел не запланировано!!!\n";
 }
 void TodoList::add()
 {
-	Todo* newList = new Todo[++_length];
-
-	for (int i = 0; i < _length - 1; ++i)
-		newList[i] = todoList[i];
-
-	delete[]todoList;
-	todoList = newList;
-
-	newList = nullptr;
-
-	Todo* newTodo = new Todo;
+	Todo newTodo;
 	std::string* s = new std::string;
 
 	system("cls");
@@ -63,7 +79,7 @@ void TodoList::add()
 	std::cout << "\nЧто нужно сделать?: ";
 	getline(std::cin, *s);
 	if (!s->empty())
-		newTodo->name(*s);
+		newTodo.name(*s);
 
 	std::cout << "Выберите приоритет:\n";
 	std::cout << "1. низкий\n";
@@ -71,12 +87,12 @@ void TodoList::add()
 	std::cout << "3. высокий\n";
 	getline(std::cin, *s);
 	if (!s->empty())
-		newTodo->priority(*s);
+		newTodo.priority(*s);
 
 	std::cout << "Добавьте подробности: ";
 	getline(std::cin, *s);
 	if (!s->empty())
-		newTodo->description(*s);
+		newTodo.description(*s);
 	delete s;
 
 	std::cout << "Введите дату и время исполнения:";
@@ -85,7 +101,7 @@ void TodoList::add()
 		char tmp[100];
 		int tmpInt;
 		tm* newDate = new tm;
-		*newDate = *newTodo->localDate();
+		*newDate = *newTodo.localDate();
 
 		std::cout << "\nДата (" << newDate->tm_mday << "): ";
 		std::cin.getline(tmp, 100);
@@ -145,20 +161,18 @@ void TodoList::add()
 
 		newDate->tm_sec = 0;
 
-		if (newTodo->date(newDate))
+		if (newTodo.date(newDate))
 			break;
 		std::cout << "Ошибочная дата. Повторите...";
 	}
 
-	todoList[_length - 1] = *newTodo;
+	todoList->push_back(newTodo);
 
 	system("cls");
 	std::cout << "\n\t<<<Задача добавлена>>>\n\n";
 }
 void TodoList::del()
 {
-	Todo* newArr = new Todo[--_length];
-
 	system("cls");
 	std::cout << " <<< Удаление одной из задач >>>\n";
 	std::cout << "Введите ID: ";
@@ -171,27 +185,19 @@ void TodoList::del()
 		if (id >= 0)
 		{
 			id = userInput[id] - '0';
-			if (id <= _length)
+			if (id <= todoList->size())
 				break;
 		}
 		else
 			std::cout << "Ошибочный ввод. Повторите...";
 	}
 
-	for (int i = 0; i < _length; ++i)
-	{
-		if (i < id)
-			newArr[i] = todoList[i];
-		else
-			newArr[i] = todoList[i + 1];
-	}
+	auto it = todoList->begin();
+	todoList->erase(it + id);
 
 	system("cls");
 
 	std::cout << "Дело с ID: " << id << " удалено.\n";
-
-	delete[]todoList;
-	todoList = newArr;
 }
 
 void TodoList::update()
@@ -208,7 +214,7 @@ void TodoList::update()
 		if (id >= 0)
 		{
 			id = userEnter[id] - '0';
-			if (id < _length)
+			if (id < todoList->size())
 				break;
 		}
 		else
@@ -217,11 +223,11 @@ void TodoList::update()
 		}
 	}
 
-	Todo* todo = &todoList[id];
+	Todo* todo = &todoList->at(id);
 
 	std::cout << "Клавиша <Ввод>, чтобы оставить прежнее значение\n";
 	std::cout << "Новое наименование " << "(" << todo->name() << "): ";
-	
+
 	getline(std::cin, userEnter);
 	if (!userEnter.empty())
 		todo->name();
@@ -238,5 +244,92 @@ void TodoList::update()
 	std::cout << "Новая дата: ";
 }
 
-void TodoList::find() {}
+void TodoList::find()
+{
+	system("cls");
+	std::cout << "\t<<< Поиск дел по: >>>\n";
+	Menu findMenu;
+	FindMenu findList;
+	findMenu.show(true, *findList.name);
+	int select = findMenu.getSelect("1234");
+	(this->*findList.func->at(select - 1))();
+}
 
+void TodoList::byName()
+{
+	std::cout << "По какому имени искать?\n--> ";
+	std::string toFind;
+	getline(std::cin, toFind);
+
+	std::cout << "\nИщем...\n";
+	bool isExist = false;
+	int* count = new int(0);
+	for (auto i : *todoList)
+	{
+		
+		int pos = (int)i.name().find(toFind);
+		if (pos >= 0)
+		{
+			i.show(*count);
+			isExist = true;
+		}
+		++*count;
+	}
+	delete count;
+
+	if (!isExist)
+	{
+		system("cls");
+		std::cout << "По этому имени нет данных\n";
+	}
+}
+
+void TodoList::byPriority()
+{
+	std::cout << "byPrir";
+}
+
+void TodoList::byDescription()
+{
+	std::cout << "Что ищем?\n--> ";
+	std::string toFind;
+	getline(std::cin, toFind);
+
+	std::cout << "\nИщем...\n";
+	bool isExist = false;
+	int* count = new int(0);
+	for (auto i : *todoList)
+	{
+
+		int pos = (int)i.description().find(toFind);
+		if (pos >= 0)
+		{
+			i.show(*count);
+			isExist = true;
+		}
+		++* count;
+	}
+	delete count;
+
+	if (!isExist)
+	{
+		system("cls");
+		std::cout << "По этому описанию нет данных\n";
+	}
+}
+void TodoList::byTime(){}
+
+void TodoList::exit()
+{
+	system("cls");
+	std::cout << "\nОсуществляется выход...\n";
+	std::exit(0);
+}
+
+void TodoList::useSelect(int select)
+{
+	if (todoList->empty() &&
+		select == 1)
+		select = menuList->name->size() - 1;
+	(this->*menuList->func->at(select))();
+}

@@ -3,10 +3,6 @@
 class Menu
 {
 public:
-	Menu();
-	void show(bool);
-	int getSelect(bool);
-private:
-	int menuLength;
-	std::string* menuList;
+	void show(bool, std::vector <std::string>);
+	int getSelect(std::string);
 };

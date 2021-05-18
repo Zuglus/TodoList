@@ -1,35 +1,22 @@
 ﻿#include <iostream>
 #include <string>
+#include <vector>
+#include "TodoList.h"
 #include "Menu.h"
 
-Menu::Menu()
+void Menu::show(bool isLongMenu, std::vector <std::string> menuList)
 {
-	menuLength = 6;
-	menuList = new std::string[]{
-		" - Добавить дело",
-		" - Удалить дело",
-		" - Редактировать дело",
-		" - Поиск дела",
-		" - Отображение списка дел",
-		" - Выход"
-	};
-}
-
-void Menu::show(bool isLongMenu)
-{
-	std::cout << "\n\t<<< Меню: >>>\n\n";
-
 	if (isLongMenu)
-		for (int i = 0; i < menuLength; ++i)
-			std::cout << i + 1 << ' ' << *(menuList + i) << std::endl;
+		for (int i = 0; i < menuList.size(); ++i)
+			std::cout << ' ' << i + 1 << ' ' << menuList.at(i) << std::endl;
 	else
 	{
-		std::cout << 1 << ' ' << *(menuList) << std::endl;
-		std::cout << 2 << ' ' << *(menuList + menuLength - 1) << std::endl;
+		std::cout << ' ' << 1 << ' ' << menuList.at(0) << std::endl;
+		std::cout << ' ' << 2 << ' ' << menuList.back() << std::endl;
 	}
 }
 
-int Menu::getSelect(bool isLongMenu)
+int Menu::getSelect(std::string range)
 {
 	std::cout << "\nВаш выбор: ";
 	std::string select;
@@ -37,29 +24,14 @@ int Menu::getSelect(bool isLongMenu)
 	while (1)
 	{
 		getline(std::cin, select);
-		int pos = select.find_first_of("0123456789");
+		int pos = (int)select.find_first_of(range);
 		if (pos >= 0)
 		{
 			selected = select[pos] - '0';
-			if (selected > 0 &&
-				isLongMenu &&
-				selected <= menuLength ||
-				selected == 1 ||
-				selected == 2)
-				break;
+			break;
 		}
 
 		std::cout << "Ошибочный выбор. Повторите...\n-->";
-	}
-
-	if (selected == menuLength &&
-		isLongMenu ||
-		selected == 2 &&
-		!isLongMenu)
-	{
-		system("cls");
-		std::cout << "\nОсуществляется выход...\n";
-		exit(100);
 	}
 
 	return selected;

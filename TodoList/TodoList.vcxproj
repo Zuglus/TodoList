@@ -148,12 +148,10 @@
     <ClCompile Include="TodoList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FindTodo.h" />
     <ClInclude Include="IsNumber.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Todo.h" />
     <ClInclude Include="TodoList.h" />
-    <ClInclude Include="UpdateTodo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

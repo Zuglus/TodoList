@@ -1,12 +1,12 @@
 ﻿#include <windows.h>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Todo.h"
 #include "TodoList.h"
 #include "Menu.h"
 #include "IsNumber.h"
-#include "UpdateTodo.h"
 #include "FindTodo.h"
 
 int main()
@@ -16,18 +16,18 @@ int main()
 	setlocale(LC_ALL, "Russian");
 
 	// Массив списка дел
-	TodoList* todoList = new TodoList;
+	TodoList* todolist = new TodoList;
 
-	todoList->show();
+	todolist->show();
 
 	// Меню выбора
 	Menu* menu = new Menu;
-	Todo x;
 
 	while (1)
 	{
-		menu->show(todoList->length());
-		int select = menu->getSelect(todoList->length());
-		todoList->useSelect(select - 1);
+		std::cout << "\n\t<<< Меню: >>>\n\n";
+		menu->show(todolist->length(), *todolist->menuList->name);
+		int select = menu->getSelect("123456");
+		todolist->useSelect(select - 1);
 	}
 }

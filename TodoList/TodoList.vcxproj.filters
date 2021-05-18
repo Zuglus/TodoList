@@ -35,12 +35,6 @@
     <ClInclude Include="Todo.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="UpdateTodo.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="FindTodo.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="IsNumber.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
