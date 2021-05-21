@@ -1,4 +1,6 @@
-﻿#include <windows.h>
+﻿// App.cpp
+
+#include <windows.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -6,7 +8,6 @@
 #include "Todo.h"
 #include "TodoList.h"
 #include "Menu.h"
-#include "IsNumber.h"
 
 int main()
 {

@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// Menu.h
+
+#pragma once
 
 class Menu
 {
