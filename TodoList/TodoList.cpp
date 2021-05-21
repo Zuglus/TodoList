@@ -2,6 +2,7 @@
 #include <string>
 #include <Windows.h>
 #include <vector>
+#include <iomanip>
 #include "Todo.h"
 #include "TodoList.h"
 #include "IsNumber.h"
@@ -93,19 +94,23 @@ void TodoList::add()
 		*newDate = *newTodo.localDate();
 		newDate->tm_min = 0;
 
-		std::cout << "\nДата (" << newDate->tm_mday << "): ";
+		std::cout << "\nДата (" << std::setfill('0')
+			<<std::setw(2) << newDate->tm_mday << "): ";
 		newDate->tm_mday = input.get(newDate->tm_mday, 1, 32);
 
-		std::cout << "Месяц (" << newDate->tm_mon + 1 << "): ";
+		std::cout << "Месяц (" << std::setfill('0')
+			<< std::setw(2) << newDate->tm_mon + 1 << "): ";
 		newDate->tm_mon = input.get(newDate->tm_mon + 1, 1, 13) - 1;
 
 		std::cout << "Год (" << newDate->tm_year + 1900 << "): ";
 		newDate->tm_year = input.get(newDate->tm_year + 1900, 1, 3000) - 1900;
 
-		std::cout << "Часы (" << newDate->tm_hour << "): ";
+		std::cout << "Часы (" << std::setfill('0') 
+			<< std::setw(2) << newDate->tm_hour << "): ";
 		newDate->tm_hour = input.get(newDate->tm_hour, 0, 24);
 
-		std::cout << "Минуты (" << newDate->tm_min << "): ";
+		std::cout << "Минуты (" <<std::setfill('0')
+			<< std::setw(2) << newDate->tm_min << "): ";
 		newDate->tm_min = input.get(newDate->tm_min, 0, 60);
 
 		newDate->tm_sec = 0;
@@ -158,7 +163,7 @@ void TodoList::update()
 	{
 		if (!todoList->empty())
 		{
-			int id = input.get(-1, 0, todoList->size());
+			id = input.get(-1, 0, todoList->size());
 			if (id >= 0)
 				break;
 			else
@@ -172,14 +177,44 @@ void TodoList::update()
 	std::cout << "Новое наименование " << "(" << todo->name() << "): ";
 	todo->name(input.get(todo->name()));
 
-	std::cout << "Новый приоритет: " << "(" << todo->priorityString() << "): ";
+	std::cout << "Новый приоритет: " << "(" << todo->priorityString() << "):\n";
 	todo->priority(input.get(todo->priority()));
 
 	std::cout << "Новое описание " << "(" << todo->description() << "): ";
 	todo->description(input.get(todo->description()));
 
 	std::cout << "Новая дата: ";
+	while (1)
+	{
+		tm* newDate = new tm;
+		time_t tmp = todo->date();
+		localtime_s(newDate, &tmp);
 
+		std::cout << "\nДата (" << std::setfill('0')
+			<< std::setw(2) << newDate->tm_mday << "): ";
+		newDate->tm_mday = input.get(newDate->tm_mday, 1, 32);
+
+		std::cout << "Месяц (" << std::setfill('0')
+			<< std::setw(2) << newDate->tm_mon + 1 << "): ";
+		newDate->tm_mon = input.get(newDate->tm_mon + 1, 1, 13) - 1;
+
+		std::cout << "Год (" << newDate->tm_year + 1900 << "): ";
+		newDate->tm_year = input.get(newDate->tm_year + 1900, 1, 3000) - 1900;
+
+		std::cout << "Часы (" << std::setfill('0')
+			<< std::setw(2) << newDate->tm_hour << "): ";
+		newDate->tm_hour = input.get(newDate->tm_hour, 0, 24);
+
+		std::cout << "Минуты (" << std::setfill('0')
+			<< std::setw(2) << newDate->tm_min << "): ";
+		newDate->tm_min = input.get(newDate->tm_min, 0, 60);
+
+		newDate->tm_sec = 0;
+
+		if (todo->date(newDate))
+			break;
+		std::cout << "Ошибочная дата. Повторите...";
+	}
 }
 
 void TodoList::find()
@@ -224,7 +259,30 @@ void TodoList::byName()
 
 void TodoList::byPriority()
 {
-	std::cout << "byPrir";
+	Input input;
+	std::cout << "Какой приоритет ищем?\n";
+	int select = input.get(0);
+
+	std::cout << "\nИщем...\n";
+	bool isExist = false;
+	int* count = new int{ 0 };
+	for (auto i : *todoList)
+	{
+
+		if (i.priority() == select)
+		{
+			i.show(*count);
+			isExist = true;
+		}
+		++* count;
+	}
+	delete count;
+
+	if (!isExist)
+	{
+		system("cls");
+		std::cout << "По этому приоритету нет данных\n";
+	}
 }
 
 void TodoList::byDescription()

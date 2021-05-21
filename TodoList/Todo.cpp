@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <time.h>
+#include <iomanip>
 #include "Todo.h"
 
 Todo::Todo()
@@ -93,10 +94,10 @@ void Todo::show(int id)
 	std::cout << "Приоритет: " << priorityString() << std::endl;
 	std::cout << "Подробности: " << description() << std::endl;
 	std::cout << "Срок исполнения: ";
-	std::cout << localDate()->tm_mday << '.';
-	std::cout << localDate()->tm_mon + 1 << '.';
+	std::cout << std::setfill('0') << std::setw(2) << localDate()->tm_mday << '.';
+	std::cout << std::setfill('0') << std::setw(2) << localDate()->tm_mon + 1 << '.';
 	std::cout << localDate()->tm_year + 1900;
-	std::cout << " к " << localDate()->tm_hour;
-	std::cout << ':' << localDate()->tm_min;
+	std::cout << " к " << std::setfill('0') << std::setw(2) << localDate()->tm_hour;
+	std::cout << ':' << std::setfill('0') << std::setw(2) << localDate()->tm_min;
 	std::cout << std::endl;
 }
