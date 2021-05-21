@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="IsNumber.cpp" />
     <ClCompile Include="App.cpp">
       <UseUnicodeForAssemblerListing Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</UseUnicodeForAssemblerListing>
@@ -148,6 +149,7 @@
     <ClCompile Include="TodoList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Input.h" />
     <ClInclude Include="IsNumber.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Todo.h" />

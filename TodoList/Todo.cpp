@@ -21,27 +21,25 @@ std::string Todo::name()
 	return _name;
 }
 
-void Todo::priority(std::string select)
+void Todo::priority(int select)
 {
-	if (select >= "1" &&
-		select <= "3")
-		switch (std::stoi(select))
-		{
-		case 1:
-			_priority = Priority::low;
-			break;
-		case 2:
-			_priority = Priority::middle;
-			break;
-		case 3:
-			_priority = Priority::high;
-			break;
-		}
+	switch (select)
+	{
+	case 0:
+		_priority = Todo::Priority::low;
+		break;
+	case 1:
+		_priority = Todo::Priority::middle;
+		break;
+	case 2:
+		_priority = Todo::Priority::high;
+		break;
+	}
 }
 
-Todo::Priority Todo::priority()
+int Todo::priority()
 {
-	return _priority;
+	return (int)_priority;
 }
 
 std::string Todo::priorityString()
@@ -68,10 +66,12 @@ std::string Todo::description()
 bool Todo::date(tm* newDate)
 {
 	time_t tmpTime = mktime(newDate);
-	if (tmpTime < time(NULL))
-		return false;
-	_date = tmpTime;
-	return true;
+	if (tmpTime > time(NULL))
+	{
+		_date = tmpTime;
+		return true;
+	}
+	return false;
 }
 
 time_t Todo::date()

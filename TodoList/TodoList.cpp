@@ -6,6 +6,7 @@
 #include "TodoList.h"
 #include "IsNumber.h"
 #include "Menu.h"
+#include "Input.h"
 
 TodoList::FindMenu::FindMenu()
 {
@@ -57,7 +58,7 @@ int TodoList::length()
 void TodoList::show()
 {
 	system("cls");
-	std::cout << "\t>>> Список дел: <<<\n";
+	std::cout << "\t>>> Список задач: <<<\n";
 
 	if (!todoList->empty())
 		for (int i = 0; i < todoList->size(); ++i)
@@ -70,94 +71,42 @@ void TodoList::show()
 void TodoList::add()
 {
 	Todo newTodo;
-	std::string* s = new std::string;
 
 	system("cls");
 
 	std::cout << "\t\n<<< Создание новой задачи: >>>\n";
 
 	std::cout << "\nЧто нужно сделать?: ";
-	getline(std::cin, *s);
-	if (!s->empty())
-		newTodo.name(*s);
+	Input input;
+	newTodo.name(input.get(newTodo.name()));
 
-	std::cout << "Выберите приоритет:\n";
-	std::cout << "1. низкий\n";
-	std::cout << "2. средний\n";
-	std::cout << "3. высокий\n";
-	getline(std::cin, *s);
-	if (!s->empty())
-		newTodo.priority(*s);
+	std::cout << "\nВыберите приоритет:\n";
+	newTodo.priority(input.get(newTodo.priority()));
 
-	std::cout << "Добавьте подробности: ";
-	getline(std::cin, *s);
-	if (!s->empty())
-		newTodo.description(*s);
-	delete s;
+	std::cout << "\nДобавьте подробности: ";
+	newTodo.description(input.get(newTodo.description()));
 
 	std::cout << "Введите дату и время исполнения:";
 	while (1)
 	{
-		char tmp[100];
-		int tmpInt;
 		tm* newDate = new tm;
 		*newDate = *newTodo.localDate();
+		newDate->tm_min = 0;
 
 		std::cout << "\nДата (" << newDate->tm_mday << "): ";
-		std::cin.getline(tmp, 100);
-		if (tmp[0] != '\0' &&
-			strlen(tmp) < 3 &&
-			IsNumber(tmp))
-		{
-			tmpInt = atoi(tmp);
-			if (tmpInt > 0 &&
-				tmpInt <= 31)
-				newDate->tm_mday = tmpInt;
-		}
+		newDate->tm_mday = input.get(newDate->tm_mday, 1, 32);
 
 		std::cout << "Месяц (" << newDate->tm_mon + 1 << "): ";
-		std::cin.getline(tmp, 100);
-		if (tmp[0] != '\0' &&
-			strlen(tmp) < 3 &&
-			IsNumber(tmp))
-		{
-			tmpInt = atoi(tmp);
-			if (tmpInt > 0 &&
-				tmpInt <= 12)
-				newDate->tm_mon = tmpInt - 1;
-		}
+		newDate->tm_mon = input.get(newDate->tm_mon + 1, 1, 13) - 1;
 
 		std::cout << "Год (" << newDate->tm_year + 1900 << "): ";
-		std::cin.getline(tmp, 100);
-		if (tmp[0] != '\0' &&
-			IsNumber(tmp))
-		{
-			newDate->tm_year = atoi(tmp);
-		}
+		newDate->tm_year = input.get(newDate->tm_year + 1900, 1, 3000) - 1900;
 
 		std::cout << "Часы (" << newDate->tm_hour << "): ";
-		std::cin.getline(tmp, 100);
-		if (tmp[0] != '\0' &&
-			strlen(tmp) < 3 &&
-			IsNumber(tmp))
-		{
-			tmpInt = atoi(tmp);
-			if (tmpInt > 0 &&
-				tmpInt <= 23)
-				newDate->tm_hour = tmpInt;
-		}
+		newDate->tm_hour = input.get(newDate->tm_hour, 0, 24);
 
 		std::cout << "Минуты (" << newDate->tm_min << "): ";
-		std::cin.getline(tmp, 100);
-		if (tmp[0] != '\0' &&
-			strlen(tmp) < 3 &&
-			IsNumber(tmp))
-		{
-			tmpInt = atoi(tmp);
-			if (tmpInt > 0 &&
-				tmpInt < 60)
-				newDate->tm_min = tmpInt;
-		}
+		newDate->tm_min = input.get(newDate->tm_min, 0, 60);
 
 		newDate->tm_sec = 0;
 
@@ -176,28 +125,26 @@ void TodoList::del()
 	system("cls");
 	std::cout << " <<< Удаление одной из задач >>>\n";
 	std::cout << "Введите ID: ";
-	std::string userInput;
-	int id;
-	while (1)
+	Input input;
+	while(1)
 	{
-		getline(std::cin, userInput);
-		id = (int)userInput.find_first_of("1234567890");
-		if (id >= 0)
+		if (!todoList->empty())
 		{
-			id = userInput[id] - '0';
-			if (id <= todoList->size())
+			int id = input.get(-1, 0, todoList->size());
+			if (id >= 0)
+			{
+				auto it = todoList->begin();
+				todoList->erase(it + id);
 				break;
+			}
+			else
+				std::cout << "Ошибочный ввод. Повторите...";
 		}
-		else
-			std::cout << "Ошибочный ввод. Повторите...";
 	}
-
-	auto it = todoList->begin();
-	todoList->erase(it + id);
 
 	system("cls");
 
-	std::cout << "Дело с ID: " << id << " удалено.\n";
+	std::cout << "Задача удалена.\n";
 }
 
 void TodoList::update()
@@ -205,21 +152,17 @@ void TodoList::update()
 	system("cls");
 	std::cout << " <<< Редактирование задачи >>>\n";
 	std::cout << "ID задачи, которую редактируем: ";
-	int id;
-	std::string userEnter;
+	Input input;
+	int id{ -1 };
 	while (1)
 	{
-		getline(std::cin, userEnter);
-		id = (int)userEnter.find_first_of("1234567890");
-		if (id >= 0)
+		if (!todoList->empty())
 		{
-			id = userEnter[id] - '0';
-			if (id < todoList->size())
+			int id = input.get(-1, 0, todoList->size());
+			if (id >= 0)
 				break;
-		}
-		else
-		{
-			std::cout << "\nОшибочный ID. Повторите...\n";
+			else
+				std::cout << "Ошибочный ввод. Повторите...";
 		}
 	}
 
@@ -227,21 +170,16 @@ void TodoList::update()
 
 	std::cout << "Клавиша <Ввод>, чтобы оставить прежнее значение\n";
 	std::cout << "Новое наименование " << "(" << todo->name() << "): ";
-
-	getline(std::cin, userEnter);
-	if (!userEnter.empty())
-		todo->name();
+	todo->name(input.get(todo->name()));
 
 	std::cout << "Новый приоритет: " << "(" << todo->priorityString() << "): ";
-	getline(std::cin, userEnter);
-	if (!userEnter.empty())
-		todo->priority(userEnter);
+	todo->priority(input.get(todo->priority()));
 
 	std::cout << "Новое описание " << "(" << todo->description() << "): ";
-	getline(std::cin, userEnter);
-	if (!userEnter.empty())
-		todo->description(userEnter);
+	todo->description(input.get(todo->description()));
+
 	std::cout << "Новая дата: ";
+
 }
 
 void TodoList::find()
@@ -330,6 +268,6 @@ void TodoList::useSelect(int select)
 {
 	if (todoList->empty() &&
 		select == 1)
-		select = menuList->name->size() - 1;
+		select = (int)menuList->name->size() - 1;
 	(this->*menuList->func->at(select))();
 }

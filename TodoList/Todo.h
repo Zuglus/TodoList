@@ -2,27 +2,27 @@
 
 class Todo
 {
-	std::string _name;
+public:
 	enum class Priority {
 		low,
 		middle,
 		high
 	};
-	Priority _priority;
-	std::string _description;
-	time_t _date;
-
-public:
 	Todo();
 	void name(std::string);
-	void priority(std::string);
+	void priority(int);
 	void description(std::string);
 	bool date(tm*);
 	std::string name();
-	Priority priority();
+	int priority();
 	std::string priorityString();
 	std::string description();
 	time_t date();
 	tm* localDate();
 	void show(int);
+private:
+	std::string _name;
+	Priority _priority;
+	std::string _description;
+	time_t _date;
 };
